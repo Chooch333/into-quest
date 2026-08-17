@@ -114,16 +114,16 @@ return orderQ([rnd(90000,99999),rnd(90000,99999),rnd(90000,99999)]);}
 if(r<0.5){var d=pick([6,4,7,3]),base=d*100000;var right=[d*10000,d*10000+rnd(1,9)*1000];var wrong=[d*1000,d*100000,d*100];var opts=shuffle(right.concat(wrong)).map(comma);var ans=right.map(function(v){return opts.indexOf(comma(v));}).filter(function(i){return i>=0;});return {q:"Select every number where the digit "+d+" is worth 1/10 of the "+d+" in "+comma(base),type:"multi",options:opts,ans:ans};}
 if(r<0.75){var c=pick([2400000,560000,78000]);return {q:"What number is 1/10 of "+comma(c)+"?",type:"num",ans:N(c/10)};}
 return orderQ([rnd(100000,999999),rnd(100000,999999),rnd(100000,999999)],"greatest to least");}
-function m2(L){if(L===1){var a=rnd(11,29),b=rnd(2,6);return {q:a+" \u00d7 "+b,type:"num",ans:N(a*b)};}
-if(L===2){if(Math.random()<0.6){var c=rnd(102,499),d=rnd(3,9);return {q:comma(c)+" \u00d7 "+d,type:"num",ans:N(c*d)};}
-var s=rnd(6,14);return {q:"A square garden has sides "+s+" feet long. What is its area, in square feet?",type:"num",ans:N(s*s)};}
-if(Math.random()<0.6){var e=rnd(112,899),f=rnd(12,39);return {q:comma(e)+" \u00d7 "+f,type:"num",ans:N(e*f)};}
-var rows=rnd(14,28),per=rnd(12,25);return {q:"A hall has "+rows+" rows with "+per+" seats in each row. How many seats in all?",type:"num",ans:N(rows*per)};}
-function m3(L){if(L===1){var d=rnd(2,7),q=rnd(4,15);return {q:(d*q)+" \u00f7 "+d,type:"num",ans:N(q)};}
-if(L===2){if(Math.random()<0.6){var d2=rnd(3,9),q2=rnd(20,90);return {q:comma(d2*q2)+" \u00f7 "+d2,type:"num",ans:N(q2)};}
-var t=rnd(4,9),o=rnd(5,12);return {q:"Portia has "+(t*o)+" postcards. That is "+t+" times as many as Jonathan. How many does Jonathan have?",type:"num",ans:N(o)};}
-if(Math.random()<0.6){var d3=rnd(12,32),q3=rnd(14,89);return {q:comma(d3*q3)+" \u00f7 "+d3,type:"num",ans:N(q3)};}
-var boxes=rnd(14,26),each=rnd(12,30);return {q:comma(boxes*each)+" books are packed into boxes of "+each+". How many boxes?",type:"num",ans:N(boxes)};}
+function m2(L){if(L===1){var a=rnd(11,19),b=rnd(2,5);return {q:a+" \u00d7 "+b,type:"num",ans:N(a*b)};}
+if(L===2){if(Math.random()<0.6){var c=rnd(21,49),d=rnd(3,7);return {q:c+" \u00d7 "+d,type:"num",ans:N(c*d)};}
+var s=rnd(5,11);return {q:"A square garden has sides "+s+" feet long. What is its area, in square feet?",type:"num",ans:N(s*s)};}
+if(Math.random()<0.6){var e=rnd(102,299),f=rnd(3,6);return {q:comma(e)+" \u00d7 "+f,type:"num",ans:N(e*f)};}
+var rows=rnd(11,20),per=rnd(11,20);return {q:"A hall has "+rows+" rows with "+per+" seats in each row. How many seats in all?",type:"num",ans:N(rows*per)};}
+function m3(L){if(L===1){var d=rnd(2,5),q=rnd(3,9);return {q:(d*q)+" \u00f7 "+d,type:"num",ans:N(q)};}
+if(L===2){if(Math.random()<0.6){var d2=rnd(3,8),q2=rnd(11,30);return {q:(d2*q2)+" \u00f7 "+d2,type:"num",ans:N(q2)};}
+var t=rnd(3,6),o=rnd(4,9);return {q:"Portia has "+(t*o)+" postcards. That is "+t+" times as many as Jonathan. How many does Jonathan have?",type:"num",ans:N(o)};}
+if(Math.random()<0.6){var d3=rnd(11,20),q3=rnd(11,30);return {q:comma(d3*q3)+" \u00f7 "+d3,type:"num",ans:N(q3)};}
+var boxes=rnd(11,20),each=rnd(11,20);return {q:comma(boxes*each)+" books are packed into boxes of "+each+". How many boxes?",type:"num",ans:N(boxes)};}
 function m4(L){if(L===1){if(Math.random()<0.5){var v=r2(rnd(11,89)/10,1);return {q:"Round "+v+" to the nearest whole number",type:"num",ans:N(Math.round(v))};}
 var a=r2(rnd(11,99)/10,1),b=r2(rnd(11,99)/10,1);if(a===b)return m4(1);return {q:"Which is greater?",type:"choice",options:[String(a),String(b)],ans:a>b?0:1};}
 if(L===2){if(Math.random()<0.5){var c=r2(rnd(100,999)/100);return {q:"Round "+c+" to the nearest tenth",type:"num",ans:N(r2(c,1))};}
@@ -132,15 +132,15 @@ if(Math.random()<0.5){var w=r2(rnd(1000,9999)/1000,3);return {q:"Round "+w+" to 
 var nums=[r2(rnd(100,999)/100),r2(rnd(100,999)/100),r2(rnd(100,999)/100)];var opts=shuffle(nums.map(String));var ans=nums.slice().sort(function(x,y){return x-y;}).map(function(v){return opts.indexOf(String(v));});return {q:"Put in order from least to greatest",type:"order",options:opts,ans:ans};}
 function m5(L){if(L===1){var a=r2(rnd(11,89)/10,1),b=r2(rnd(11,89)/10,1);return Math.random()<0.5?{q:a+" + "+b,type:"num",ans:N(r2(a+b))}:{q:r2(a+b)+" \u2212 "+b,type:"num",ans:N(a)};}
 if(L===2){var c=r2(rnd(150,999)/100),d=r2(rnd(150,999)/100);return Math.random()<0.5?{q:c+" + "+d,type:"num",ans:N(r2(c+d))}:{q:r2(c+d)+" \u2212 "+d,type:"num",ans:N(c)};}
-if(Math.random()<0.6){var e=r2(rnd(1500,9999)/100),f=r2(rnd(150,1400)/100);return {q:e+" \u2212 "+f,type:"num",ans:N(r2(e-f))};}
+if(Math.random()<0.6){var e=r2(rnd(800,2500)/100),f=r2(rnd(150,700)/100);return {q:e+" \u2212 "+f,type:"num",ans:N(r2(e-f))};}
 var price=r2(rnd(150,900)/100),paid=rnd(10,20);return {q:"A snack costs $"+price.toFixed(2)+". You pay with $"+paid+". How much change? (just the number)",type:"num",ans:N(r2(paid-price))};}
 function m6(L){if(L===1){var a=r2(rnd(2,9)/10,1),b=rnd(2,9);return {q:a+" \u00d7 "+b,type:"num",ans:N(r2(a*b))};}
 if(L===2){var c=r2(rnd(11,99)/10,1),d=rnd(2,9);return {q:c+" \u00d7 "+d,type:"num",ans:N(r2(c*d))};}
-if(Math.random()<0.5){var e=r2(rnd(11,99)/10,1),f=r2(rnd(11,99)/10,1);return {q:e+" \u00d7 "+f,type:"num",ans:N(r2(e*f))};}
-var div=rnd(2,9),q=r2(rnd(11,99)/10,1);return {q:r2(q*div)+" \u00f7 "+div,type:"num",ans:N(q)};}
+if(Math.random()<0.5){var e=r2(rnd(11,49)/10,1),f=r2(rnd(11,29)/10,1);return {q:e+" \u00d7 "+f,type:"num",ans:N(r2(e*f))};}
+var div=rnd(2,6),q=r2(rnd(11,59)/10,1);return {q:r2(q*div)+" \u00f7 "+div,type:"num",ans:N(q)};}
 function m7(L){if(L===1){var d=pick([3,4,5,6,8]),a=rnd(1,d-2),b=rnd(1,d-1-a);return {q:a+"/"+d+" + "+b+"/"+d,type:"num",ans:F(a+b,d)};}
 if(L===2){var s=pick([2,3,4]),m=pick([2,3]),big=s*m,n1=rnd(1,s-1),n2=rnd(1,big-1);return {q:n1+"/"+s+" + "+n2+"/"+big,type:"num",ans:F(n1*m+n2,big)};}
-var ds=[2,3,4,5,6,8],d1=pick(ds),d2=pick(ds.filter(function(x){return x!==d1;}));var a2=rnd(1,d1-1),b2=rnd(1,d2-1),add=Math.random()<0.6;var n=add?a2*d2+b2*d1:a2*d2-b2*d1;if(!add&&n<=0)return m7(3);return {q:a2+"/"+d1+" "+(add?"+":"\u2212")+" "+b2+"/"+d2,type:"num",ans:F(n,d1*d2)};}
+var ds=[2,3,4,6],d1=pick(ds),d2=pick(ds.filter(function(x){return x!==d1;}));var a2=rnd(1,d1-1),b2=rnd(1,d2-1),add=Math.random()<0.6;var n=add?a2*d2+b2*d1:a2*d2-b2*d1;if(!add&&n<=0)return m7(3);return {q:a2+"/"+d1+" "+(add?"+":"\u2212")+" "+b2+"/"+d2,type:"num",ans:F(n,d1*d2)};}
 function m8(L){if(L===1){var d=pick([2,3,4,5]),w=d*rnd(2,6);return {q:"1/"+d+" of "+w,type:"num",ans:N(w/d)};}
 if(L===2){if(Math.random()<0.5){var d2=pick([2,3,4,5,6]),n=rnd(2,d2-1),w2=d2*rnd(2,8);return {q:n+"/"+d2+" of "+w2,type:"num",ans:N(w2/d2*n)};}
 var a=pick([2,3,4]),b=pick([2,3,4]);return {q:"1/"+a+" \u00d7 1/"+b,type:"num",ans:F(1,a*b)};}
@@ -148,35 +148,35 @@ if(Math.random()<0.6){var e=pick([2,3,4,5,6]),f=pick([2,3,4,5]),n1=rnd(1,e-1),n2
 var g=pick([2,3,4,5]),h=rnd(1,g-1),w3=rnd(2,5);return {q:h+"/"+g+" \u00f7 "+w3,type:"num",ans:F(h,g*w3)};}
 function m9(L){if(L===1){var l=rnd(2,5),w=rnd(2,5),h=rnd(2,4);return {q:"Volume of a prism "+l+" \u00d7 "+w+" \u00d7 "+h,type:"num",ans:N(l*w*h)};}
 if(L===2){var l2=rnd(3,9),w2=rnd(3,9),h2=rnd(2,7);return {q:"A box is "+l2+" cm long, "+w2+" cm wide, and "+h2+" cm tall. What is its volume in cubic cm?",type:"num",ans:N(l2*w2*h2)};}
-if(Math.random()<0.5){var a=rnd(3,8),b=rnd(3,8),c=rnd(2,6),d=rnd(2,5),e=rnd(2,5),f=rnd(2,4);return {q:"Two prisms joined: "+a+"\u00d7"+b+"\u00d7"+c+" and "+d+"\u00d7"+e+"\u00d7"+f+". Total volume?",type:"num",ans:N(a*b*c+d*e*f)};}
-var g=rnd(3,9),h3=rnd(3,9),v=g*h3*rnd(2,8);return {q:"A prism has volume "+v+" and a base of "+g+" \u00d7 "+h3+". What is its height?",type:"num",ans:N(v/(g*h3))};}
+if(Math.random()<0.5){var a=rnd(2,5),b=rnd(2,5),c=rnd(2,4),d=rnd(2,4),e=rnd(2,4),f=rnd(2,3);return {q:"Two prisms joined: "+a+"\u00d7"+b+"\u00d7"+c+" and "+d+"\u00d7"+e+"\u00d7"+f+". Total volume?",type:"num",ans:N(a*b*c+d*e*f)};}
+var g=rnd(2,6),h3=rnd(2,6),v=g*h3*rnd(2,6);return {q:"A prism has volume "+v+" and a base of "+g+" \u00d7 "+h3+". What is its height?",type:"num",ans:N(v/(g*h3))};}
 function m10(L){if(L===1){var c=pick([["m","cm",100],["ft","in",12],["yd","ft",3],["km","m",1000],["L","mL",1000]]);return {q:"1 "+c[0]+" = ? "+c[1],type:"num",ans:N(c[2])};}
 if(L===2){if(Math.random()<0.6){var c2=pick([["m","cm",100],["ft","in",12],["lb","oz",16],["gal","qt",4],["kg","g",1000]]),n=rnd(2,9);return {q:n+" "+c2[0]+" = ? "+c2[1],type:"num",ans:N(n*c2[2])};}
 var b=rnd(3,15);return {q:"Mean of "+[b,b+1,b-1].join(", "),type:"num",ans:N(b)};}
-if(Math.random()<0.5){var c3=pick([["km","m",1000],["kg","g",1000],["L","mL",1000]]),n3=r2(rnd(15,95)/10,1);return {q:n3+" "+c3[0]+" = ? "+c3[1],type:"num",ans:N(r2(n3*c3[2]))};}
+if(Math.random()<0.5){var c3=pick([["km","m",1000],["kg","g",1000],["L","mL",1000],["lb","oz",16]]),n3=rnd(2,12);return {q:n3+" "+c3[0]+" = ? "+c3[1],type:"num",ans:N(n3*c3[2])};}
 var m=rnd(5,20),a=rnd(1,3),b2=rnd(1,4);return {q:"Mean of "+[m-a,m+a,m-b2,m+b2].join(", "),type:"num",ans:N(m)};}
 function m11(L){if(L===1){var x=rnd(1,9),y=rnd(1,9),mv=rnd(1,5);return {q:"Start at ("+x+", "+y+") and move right "+mv+". What is the new x?",type:"num",ans:N(x+mv)};}
 if(L===2){var s=rnd(2,6),st=rnd(2,6);return {q:"Pattern: "+[s,s+st,s+2*st,s+3*st].join(", ")+", ... What comes next?",type:"num",ans:N(s+4*st)};}
 if(Math.random()<0.5){var a=rnd(1,4),f=rnd(2,4);return {q:"Pattern: "+[a,a*f,a*f*f].join(", ")+", ... What comes next?",type:"num",ans:N(a*f*f*f)};}
 var x1=rnd(1,5),x2=rnd(6,12),y2=rnd(1,9);return {q:"How far apart are ("+x1+", "+y2+") and ("+x2+", "+y2+")?",type:"num",ans:N(x2-x1)};}
 function m12(L){if(L===1){var a=rnd(2,9),b=rnd(2,5),c=rnd(2,5);return {q:a+" + "+b+" \u00d7 "+c,type:"num",ans:N(a+b*c)};}
-if(L===2){if(Math.random()<0.5){var d=rnd(2,12),e=rnd(2,8),f=rnd(2,5);return {q:"("+d+" + "+e+") \u00d7 "+f,type:"num",ans:N((d+e)*f)};}
-var g=rnd(15,40),h=rnd(2,8),i=rnd(2,5);return {q:g+" \u2212 "+h+" \u00d7 "+i,type:"num",ans:N(g-h*i)};}
-if(Math.random()<0.5){var j=rnd(3,9),k=rnd(2,6),l=rnd(2,9),m=rnd(2,20);return {q:j+" \u00d7 "+k+" \u2212 "+l+" + "+m,type:"num",ans:N(j*k-l+m)};}
-var n=rnd(2,12),o=rnd(2,6),p=rnd(2,9);return {q:(n*o*p)+" \u00f7 ("+o+" \u00d7 "+p+")",type:"num",ans:N(n)};}
+if(L===2){if(Math.random()<0.5){var d=rnd(2,9),e=rnd(2,6),f=rnd(2,4);return {q:"("+d+" + "+e+") \u00d7 "+f,type:"num",ans:N((d+e)*f)};}
+var g=rnd(12,30),h=rnd(2,6),i=rnd(2,4);return {q:g+" \u2212 "+h+" \u00d7 "+i,type:"num",ans:N(g-h*i)};}
+if(Math.random()<0.5){var j=rnd(2,7),k=rnd(2,5),l=rnd(2,8),m=rnd(2,12);return {q:j+" \u00d7 "+k+" \u2212 "+l+" + "+m,type:"num",ans:N(j*k-l+m)};}
+var n=rnd(2,9),o=rnd(2,4),p=rnd(2,5);return {q:(n*o*p)+" \u00f7 ("+o+" \u00d7 "+p+")",type:"num",ans:N(n)};}
 var BOSSES=[
-{id:0,mod:"Module 1",name:"The Tenfold",face:"\uD83D\uDD1F",hp:130,hit:10,time:30,gen:m1,reward:60,topic:"10-to-1 place value relationship",taunt:"Every step is ten times the last.",hint:"Moving one place LEFT makes a digit 10 times as much. Moving one place RIGHT makes it 1/10 as much. '10 times as much as 50' means 50 \u00d7 10 = 500. '1/10 of 4,000' means 4,000 \u00f7 10 = 400."},
-{id:1,mod:"Module 2",name:"Grimtooth",face:"\uD83D\uDC79",hp:180,hit:12,time:35,gen:m2,reward:90,topic:"Multiplying multi-digit numbers",taunt:"Bigger numbers. Same rules.",hint:"Break it apart: 342 \u00d7 23 = (342 \u00d7 20) + (342 \u00d7 3). For the area of a square, multiply the side by itself."},
-{id:2,mod:"Module 3",name:"The Divider",face:"\uD83D\uDDE1\uFE0F",hp:210,hit:13,time:35,gen:m3,reward:110,topic:"Dividing multi-digit numbers",taunt:"I split everything.",hint:"Ask how many times the divisor fits, one digit at a time. If something is '8 times as many' as another, divide to find the smaller one."},
-{id:3,mod:"Module 4",name:"Pointclaw",face:"\uD83E\uDD82",hp:240,hit:14,time:30,gen:m4,reward:130,topic:"Decimal place value, rounding, comparing",taunt:"Watch the point.",hint:"To round, look at the digit just after the place you want \u2014 5 or more rounds up. To compare, check the biggest place first."},
-{id:4,mod:"Module 5",name:"The Aligner",face:"\uD83D\uDCD0",hp:260,hit:15,time:30,gen:m5,reward:150,topic:"Adding & subtracting decimals",taunt:"Line up. Or fall down.",hint:"Line up the decimal points, then add or subtract like normal. Fill empty spots with zeros if it helps."},
-{id:5,mod:"Module 6",name:"Shiftmaw",face:"\uD83C\uDF00",hp:290,hit:16,time:32,gen:m6,reward:170,topic:"Multiplying & dividing decimals",taunt:"Count your places carefully.",hint:"Multiplying: ignore the points, multiply, then count how many decimal places were in both numbers together and put that many in your answer."},
-{id:6,mod:"Module 7",name:"Fracture",face:"\uD83D\uDC09",hp:310,hit:17,time:38,gen:m7,reward:190,topic:"Adding & subtracting fractions",taunt:"Nothing here shares a bottom.",hint:"Same bottom? Just add the tops. Different bottoms? Make them match first, then add the tops. Type answers like 5/12 \u2014 any equal fraction counts."},
-{id:7,mod:"Module 8",name:"The Splitter",face:"\u2702\uFE0F",hp:340,hit:18,time:36,gen:m8,reward:210,topic:"Multiplying & dividing fractions",taunt:"I make things smaller.",hint:"'1/4 of 12' means 12 \u00f7 4. Multiply fractions straight across: tops \u00d7 tops, bottoms \u00d7 bottoms. Dividing by a whole number makes the bottom bigger."},
-{id:8,mod:"Module 9",name:"Cubewarden",face:"\uD83E\uDDCA",hp:360,hit:19,time:32,gen:m9,reward:230,topic:"Volume of prisms",taunt:"Fill me if you can.",hint:"Volume = length \u00d7 width \u00d7 height. For two joined prisms, find each volume and add. To find a missing height, divide the volume by the base area."},
-{id:9,mod:"Module 10",name:"The Measurer",face:"\u2696\uFE0F",hp:380,hit:20,time:32,gen:m10,reward:250,topic:"Unit conversion & mean",taunt:"Convert, or be converted.",hint:"Big unit to small unit means multiply. 1 m = 100 cm, 1 km = 1,000 m, 1 ft = 12 in, 1 lb = 16 oz. Mean = add them all, divide by how many."},
-{id:10,mod:"Module 11",name:"Gridstalker",face:"\uD83D\uDCCD",hp:400,hit:21,time:32,gen:m11,reward:280,topic:"Coordinate grid & patterns",taunt:"I know exactly where you are.",hint:"In (x, y) the first number is across, the second is up. For patterns, find what happens each step \u2014 adding the same amount, or multiplying by the same amount."},
-{id:11,mod:"Module 12",name:"OPERATOR",face:"\uD83D\uDC41\uFE0F",hp:460,hit:23,time:32,gen:m12,reward:450,topic:"Expressions & order of operations",taunt:"Order matters. You do not.",hint:"Parentheses first, then Multiply and Divide left to right, then Add and Subtract left to right. Never just go straight across."}];
+{id:0,mod:"Module 1",name:"The Tenfold",face:"\uD83D\uDD1F",hp:120,hit:8,time:35,gen:m1,reward:60,topic:"10-to-1 place value relationship",taunt:"Every step is ten times the last.",hint:"Moving one place LEFT makes a digit 10 times as much. Moving one place RIGHT makes it 1/10 as much. '10 times as much as 50' means 50 \u00d7 10 = 500. '1/10 of 4,000' means 4,000 \u00f7 10 = 400."},
+{id:1,mod:"Module 2",name:"Grimtooth",face:"\uD83D\uDC79",hp:140,hit:9,time:40,gen:m2,reward:90,topic:"Multiplying multi-digit numbers",taunt:"Bigger numbers. Same rules.",hint:"Break it apart: 342 \u00d7 23 = (342 \u00d7 20) + (342 \u00d7 3). For the area of a square, multiply the side by itself."},
+{id:2,mod:"Module 3",name:"The Divider",face:"\uD83D\uDDE1\uFE0F",hp:160,hit:10,time:40,gen:m3,reward:110,topic:"Dividing multi-digit numbers",taunt:"I split everything.",hint:"Ask how many times the divisor fits, one digit at a time. If something is '8 times as many' as another, divide to find the smaller one."},
+{id:3,mod:"Module 4",name:"Pointclaw",face:"\uD83E\uDD82",hp:180,hit:11,time:38,gen:m4,reward:130,topic:"Decimal place value, rounding, comparing",taunt:"Watch the point.",hint:"To round, look at the digit just after the place you want \u2014 5 or more rounds up. To compare, check the biggest place first."},
+{id:4,mod:"Module 5",name:"The Aligner",face:"\uD83D\uDCD0",hp:200,hit:12,time:38,gen:m5,reward:150,topic:"Adding & subtracting decimals",taunt:"Line up. Or fall down.",hint:"Line up the decimal points, then add or subtract like normal. Fill empty spots with zeros if it helps."},
+{id:5,mod:"Module 6",name:"Shiftmaw",face:"\uD83C\uDF00",hp:220,hit:13,time:40,gen:m6,reward:170,topic:"Multiplying & dividing decimals",taunt:"Count your places carefully.",hint:"Multiplying: ignore the points, multiply, then count how many decimal places were in both numbers together and put that many in your answer."},
+{id:6,mod:"Module 7",name:"Fracture",face:"\uD83D\uDC09",hp:240,hit:14,time:45,gen:m7,reward:190,topic:"Adding & subtracting fractions",taunt:"Nothing here shares a bottom.",hint:"Same bottom? Just add the tops. Different bottoms? Make them match first, then add the tops. Type answers like 5/12 \u2014 any equal fraction counts."},
+{id:7,mod:"Module 8",name:"The Splitter",face:"\u2702\uFE0F",hp:260,hit:15,time:42,gen:m8,reward:210,topic:"Multiplying & dividing fractions",taunt:"I make things smaller.",hint:"'1/4 of 12' means 12 \u00f7 4. Multiply fractions straight across: tops \u00d7 tops, bottoms \u00d7 bottoms. Dividing by a whole number makes the bottom bigger."},
+{id:8,mod:"Module 9",name:"Cubewarden",face:"\uD83E\uDDCA",hp:280,hit:16,time:40,gen:m9,reward:230,topic:"Volume of prisms",taunt:"Fill me if you can.",hint:"Volume = length \u00d7 width \u00d7 height. For two joined prisms, find each volume and add. To find a missing height, divide the volume by the base area."},
+{id:9,mod:"Module 10",name:"The Measurer",face:"\u2696\uFE0F",hp:300,hit:17,time:40,gen:m10,reward:250,topic:"Unit conversion & mean",taunt:"Convert, or be converted.",hint:"Big unit to small unit means multiply. 1 m = 100 cm, 1 km = 1,000 m, 1 ft = 12 in, 1 lb = 16 oz. Mean = add them all, divide by how many."},
+{id:10,mod:"Module 11",name:"Gridstalker",face:"\uD83D\uDCCD",hp:320,hit:18,time:40,gen:m11,reward:280,topic:"Coordinate grid & patterns",taunt:"I know exactly where you are.",hint:"In (x, y) the first number is across, the second is up. For patterns, find what happens each step \u2014 adding the same amount, or multiplying by the same amount."},
+{id:11,mod:"Module 12",name:"OPERATOR",face:"\uD83D\uDC41\uFE0F",hp:360,hit:20,time:42,gen:m12,reward:450,topic:"Expressions & order of operations",taunt:"Order matters. You do not.",hint:"Parentheses first, then Multiply and Divide left to right, then Add and Subtract left to right. Never just go straight across."}];
 var GEAR=[{id:"g1",name:"Chalk Blade",cost:80,dmg:5,desc:"+5 damage every hit"},{id:"g2",name:"Protractor Shield",cost:120,def:7,desc:"Take 7 less damage"},{id:"g3",name:"Compass of Focus",cost:180,time:8,desc:"+8 seconds per problem"},{id:"g4",name:"Prime Hammer",cost:320,dmg:14,desc:"+14 damage every hit"},{id:"g5",name:"Base-Ten Gauntlet",cost:500,dmg:10,def:8,desc:"+10 damage, take 8 less"},{id:"g6",name:"Crown of Powers",cost:900,dmg:20,def:12,time:6,desc:"+20 dmg, \u221212 taken, +6s"}];
 var KEY="intoquest.save.v1";
 var saveOK=true;
@@ -194,7 +194,7 @@ function isCorrect(){var p=S.prob;if(p.type==="num")return checkNum(S.entry,p.an
 function answerText(){var p=S.prob;if(p.type==="num")return p.ans.t==="f"?p.ans.n+"/"+p.ans.d:String(p.ans.v);if(p.type==="choice")return p.options[p.ans];if(p.type==="multi")return p.ans.map(function(i){return p.options[i];}).join(", ");return p.ans.map(function(i){return p.options[i];}).join(" \u2192 ");}
 function hasAnswer(){var p=S.prob;if(p.type==="num")return S.entry!=="";if(p.type==="choice")return S.chosen!==null;if(p.type==="multi")return S.selected.length>0;return S.ordered.length===p.options.length;}
 var LEVELS=["Easy","Medium","Hard"];
-function levelFor(hp){var p=hp/S.boss.hp;if(S.save.easyMode)return p>0.4?1:2;return p>0.66?1:(p>0.33?2:3);}
+function levelFor(hp){var p=hp/S.boss.hp;if(S.save.easyMode)return p>0.25?1:2;return p>0.55?1:(p>0.2?2:3);}
 function answerHTML(locked){var p=S.prob,h="";
 if(p.type==="num"){var keys=["1","2","3","4","5","6","7","8","9",".","0","/"];h+='<div class="pad">';keys.forEach(function(k){h+='<button class="key'+(k==="."||k==="/"?" alt":"")+'" data-key="'+k+'"'+(locked?" disabled":"")+'>'+k+'</button>';});h+='<button class="key wide alt" data-clear="1"'+(locked?" disabled":"")+'>clear</button></div>';return h;}
 if(p.type==="choice"){h+='<div class="opts">';p.options.forEach(function(o,i){h+='<button class="opt'+(S.chosen===i?" on":"")+'" data-choice="'+i+'"'+(locked?" disabled":"")+'>'+esc(o)+'</button>';});return h+'</div>';}
@@ -245,7 +245,7 @@ function nextProblem(hp){S.prob=S.boss.gen(levelFor(hp));resetAnswer();S.t=S.lim
 function takeHit(why){var b=bonus(),dmg=Math.max(4,S.boss.hit-b.def);S.myHp=Math.max(0,S.myHp-dmg);S.streak=0;S.msg=why+" You take "+dmg+".";S.flash="hurt";setTimeout(function(){S.flash=null;},300);
 if(S.myHp<=0){stopTimer();S.screen="lose";}else nextProblem(S.bossHp);render();}
 function doAttack(){if(!hasAnswer())return;
-if(isCorrect()){var b=bonus();S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((18+b.dmg)*(1+Math.min(S.streak-1,5)*0.25));S.bossHp=Math.max(0,S.bossHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
+if(isCorrect()){var b=bonus();S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((22+b.dmg)*(1+Math.min(S.streak-1,6)*0.30));S.bossHp=Math.max(0,S.bossHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
 if(S.bossHp<=0){stopTimer();S.screen="win";}else nextProblem(S.bossHp);render();}
 else takeHit("Wrong \u2014 it was "+answerText()+".");}
 function startBattle(boss){S.boss=boss;S.bossHp=boss.hp;S.myHp=100;S.streak=0;S.best=0;S.limit=boss.time+bonus().time;S.t=S.limit;S.msg=boss.taunt;S.prob=boss.gen(1);resetAnswer();S.screen="battle";startTimer();render();}
