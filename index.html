@@ -1,0 +1,273 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><title>Into Quest — Grade 5 Math</title><meta name="theme-color" content="#0B0A24"><link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACw0lEQVR4nO3dwW1TQRRAUQexgpSBoAAqAKpAbCiAciiADaIKoAIKgDoogAVSlEUuG/6bZOxzVln5W0/3j3+sGfnq6ZNnJ7jLo/t+Azxc4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iBNxbFgnxI3hqZt5dje3H04GIfFY3f2kG5s+vZbdBxSIoc7h93n7MsDKUkcJHGQxEESB2nVQeqX79Zc6OG4/vH5vt/C/5r/Euzysrht60SGD1JfdhmnzScweZB657kcaN85eCAljR2k3vZ2mbDpNKwcJHGQxEESB0kcJHGQxEESB0kcJHGQxEESB2nsrOzO+xgOt+k0rBzjNi3jNHtWdtuh8JdtgoN2vz1WnZW9vER2L+PkrCz/4IGUJA6SOEjiIImDJA7SooPUr39+XXOhs/ftxZtl1xr/nkMWE9YkMvuxoowhawY7GIcyRi0YrwdS0lQclo0FpodsjTuwkxTx8rN4AAAAAElFTkSuQmCC"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Into Quest"><link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"><style>
+:root{--night:#0B0A24;--panel:#191542;--edge:#2E2870;--gold:#FFC94A;--pink:#FF3D7F;--cyan:#4DE3E1;--ink:#E9E5FF;--green:#7CFFB2;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{margin:0;background:var(--night);color:var(--ink);min-height:100vh;font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;padding:env(safe-area-inset-top) 14px calc(env(safe-area-inset-bottom) + 20px);display:flex;justify-content:center;}
+#app{width:100%;max-width:540px;display:flex;flex-direction:column;gap:12px;padding-top:14px;}
+.head{text-align:center;}
+.title{font-family:'Bungee',Impact,sans-serif;font-size:34px;margin:0;color:var(--cyan);line-height:1;}
+.title span{color:var(--gold);}
+h2{font-family:'Bungee',Impact,sans-serif;font-size:22px;margin:4px 0;color:var(--gold);}
+.sub{font-size:13px;opacity:.7;margin:4px 0 0;}
+.note{font-size:11.5px;opacity:.5;text-align:center;margin:0;}
+.tip{font-size:12px;opacity:.6;margin:0 0 2px;text-align:center;}
+.stats{display:flex;gap:8px;}
+.stat{flex:1;background:var(--panel);border:2px solid var(--edge);border-radius:12px;padding:9px 6px;text-align:center;min-width:0;}
+.stat .v{font-family:'Bungee',sans-serif;font-size:19px;line-height:1.15;}
+.stat .v.tiny{font-size:11px;word-break:break-all;}
+.stat .l{font-size:9.5px;opacity:.6;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.gold .v{color:var(--gold);}.cyan .v{color:var(--cyan);}.pink .v{color:var(--pink);}
+.mode{display:flex;align-items:center;gap:10px;text-align:left;font:inherit;font-size:12.5px;background:var(--panel);border:2px solid var(--edge);color:var(--ink);border-radius:12px;padding:11px 13px;cursor:pointer;width:100%;}
+.mode.on{border-color:var(--green);}
+.dot{width:11px;height:11px;border-radius:50%;background:#3A3470;flex-shrink:0;}
+.mode.on .dot{background:var(--green);}
+.list{display:flex;flex-direction:column;gap:7px;}
+.row{display:flex;align-items:center;gap:10px;background:var(--panel);border:2px solid var(--edge);border-radius:13px;padding:10px;}
+.row.locked{opacity:.4;}
+.row.done{border-color:var(--gold);}
+.face{font-size:24px;}.face.big{font-size:30px;}
+.txt{display:flex;flex-direction:column;flex:1;min-width:0;}
+.modtag{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);opacity:.8;}
+.nm{font-weight:700;font-size:15px;}
+.meta{font-size:11px;opacity:.62;}
+.acts{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
+.mini{font:inherit;font-size:11px;font-weight:700;padding:6px 12px;border-radius:8px;border:1px solid var(--edge);background:transparent;color:var(--ink);cursor:pointer;}
+.mini.solid{background:var(--pink);border-color:var(--pink);color:#fff;}
+.mini:disabled{background:#2A2560;border-color:#2A2560;color:#7B75B8;}
+.chk{font-size:11px;font-weight:700;color:var(--gold);}
+.buy{background:var(--gold);color:#2A1B00;border:0;border-radius:9px;padding:9px 15px;cursor:pointer;font:inherit;font-weight:700;}
+.buy:disabled{background:#3A3470;color:#8C86C4;}
+.levels{display:flex;gap:8px;}
+.lvl{flex:1;font-family:'Bungee',sans-serif;font-size:13px;padding:11px 0;border-radius:11px;border:2px solid var(--edge);background:transparent;color:var(--ink);cursor:pointer;}
+.lvl.on{background:var(--cyan);border-color:var(--cyan);color:#04262B;}
+.btnrow{display:flex;gap:10px;}
+.btn{flex:1;padding:13px;border-radius:12px;font-family:'Bungee',sans-serif;font-size:14px;border:0;cursor:pointer;}
+.btn.gold{background:var(--gold);color:#2A1B00;}
+.btn.ghost{background:transparent;border:2px solid var(--edge);color:var(--ink);}
+.hint{background:#141136;border-left:4px solid var(--cyan);border-radius:0 10px 10px 0;padding:11px 13px;font-size:13px;line-height:1.5;}
+.hint b{color:var(--cyan);}
+.bossbar{background:var(--panel);border:2px solid var(--edge);border-radius:14px;padding:12px;}
+.bbtop{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.hpnum{font-family:'Bungee',sans-serif;color:var(--pink);font-size:16px;}
+.hpnum.sm{font-size:12px;color:var(--cyan);flex:1;}
+.dim{opacity:.45;font-size:12px;}
+.numline{position:relative;height:14px;background:#120F33;border-radius:3px;margin-bottom:20px;}
+.nlfill{position:absolute;top:0;bottom:0;left:0;background:linear-gradient(90deg,var(--pink),#FF8A3D);border-radius:3px;transition:width .3s ease;}
+.tickwrap{position:absolute;top:0;transform:translateX(-50%);}
+.tick{width:2px;height:20px;background:#6B63B8;}
+.ticklab{font-size:9px;opacity:.5;margin-top:2px;transform:translateX(-40%);}
+.msg{text-align:center;font-size:13px;min-height:18px;opacity:.85;margin:0;}
+.fb{text-align:center;font-size:14px;font-weight:600;margin:0;}
+.fb.ok{color:var(--green);}.fb.bad{color:var(--pink);}
+.problem{background:var(--panel);border:2px solid var(--edge);border-radius:16px;padding:16px 14px;text-align:center;}
+.lvltag{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.45;margin-bottom:6px;}
+.q{font-family:'Bungee',sans-serif;font-size:26px;color:var(--cyan);line-height:1.25;word-break:break-word;}
+.q.small{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;line-height:1.45;}
+.entry{font-family:'Bungee',sans-serif;font-size:25px;color:var(--gold);margin-top:8px;min-height:30px;}
+.timer{height:6px;background:#120F33;border-radius:3px;overflow:hidden;}
+.tfill{height:100%;background:var(--cyan);transition:width .12s linear;}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.key{background:var(--panel);border:2px solid var(--edge);color:var(--ink);font-family:'Bungee',sans-serif;font-size:19px;padding:14px 0;border-radius:12px;cursor:pointer;}
+.key:active{background:var(--edge);}
+.key.alt{font-size:15px;color:var(--cyan);}
+.key.wide{grid-column:span 3;font-size:13px;padding:11px 0;}
+.opts{display:flex;flex-direction:column;gap:7px;}
+.opt{display:flex;align-items:center;gap:10px;background:var(--panel);border:2px solid var(--edge);color:var(--ink);font:inherit;font-size:15px;font-weight:600;text-align:left;padding:13px 14px;border-radius:12px;cursor:pointer;}
+.opt.on{border-color:var(--cyan);background:#1E1A55;}
+.box{width:22px;height:22px;border-radius:6px;border:2px solid var(--edge);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--cyan);flex-shrink:0;}
+.opt.on .box{border-color:var(--cyan);}
+.attack{background:var(--pink);color:#fff;font-family:'Bungee',sans-serif;font-size:19px;border:0;border-radius:14px;padding:16px;cursor:pointer;letter-spacing:1px;width:100%;}
+.attack.train{background:var(--cyan);color:#04262B;}
+.attack:active{transform:scale(.98);}
+.myrow{display:flex;align-items:center;gap:10px;}
+.myhp{flex:1;height:12px;background:#120F33;border-radius:6px;overflow:hidden;}
+.myfill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));transition:width .3s;}
+.flee{background:transparent;border:1px solid var(--edge);color:var(--ink);opacity:.6;font-size:12px;border-radius:8px;padding:7px 11px;cursor:pointer;font:inherit;}
+.savebar{font-size:11.5px;text-align:center;padding:8px 10px;border-radius:9px;}
+.savebar.ok{background:#12331F;color:var(--green);}
+.savebar.bad{background:#3A0F22;color:#FF8FB0;}
+.end{text-align:center;align-items:center;padding-top:50px;}
+.endface{font-size:70px;}
+.flash-hit{animation:hit .25s;}
+.flash-hurt{animation:hurt .3s;}
+@keyframes hit{50%{filter:brightness(1.35);}}
+@keyframes hurt{25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
+</style></head><body><div id="app"></div><script>
+var rnd=function(a,b){return Math.floor(Math.random()*(b-a+1))+a;};
+var pick=function(a){return a[Math.floor(Math.random()*a.length)];};
+var gcd=function(a,b){return b?gcd(b,a%b):Math.abs(a);};
+var r2=function(n,d){return +n.toFixed(d===undefined?2:d);};
+var comma=function(n){return n.toLocaleString("en-US");};
+var shuffle=function(a){return a.map(function(v){return [Math.random(),v];}).sort(function(x,y){return x[0]-y[0];}).map(function(x){return x[1];});};
+var N=function(v){return {t:"n",v:v};};
+var F=function(n,d){var g=gcd(n,d);return {t:"f",n:n/g,d:d/g};};
+var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});};
+function orderQ(nums,label){label=label||"least to greatest";var opts=shuffle(nums.map(comma));var sorted=nums.slice().sort(function(a,b){return a-b;}).map(comma);if(label!=="least to greatest")sorted.reverse();var ans=sorted.map(function(s){return opts.indexOf(s);});return {q:"Put in order from "+label,type:"order",options:opts,ans:ans};}
+function m1(L){var r=Math.random();
+if(L===1){if(r<0.4){var n=pick([50,20,90,300,700,40]);return {q:"What number is 10 times as much as "+comma(n)+"?",type:"num",ans:N(n*10)};}
+if(r<0.8){var n2=pick([400,3000,60,900,5000]);return {q:"What number is 1/10 of "+comma(n2)+"?",type:"num",ans:N(n2/10)};}
+return {q:"How does the value of the first 3 in 330 compare to the second 3?",type:"choice",options:["10 times as much","1/10 as much","The same","100 times as much"],ans:0};}
+if(L===2){if(r<0.35){var a=pick([300000,8000,45000,6000]);return {q:"What number is 10 times as much as "+comma(a)+"?",type:"num",ans:N(a*10)};}
+if(r<0.7){var b=pick([8000000,30000,700000,90000]);return {q:"What number is 1/10 of "+comma(b)+"?",type:"num",ans:N(b/10)};}
+return orderQ([rnd(90000,99999),rnd(90000,99999),rnd(90000,99999)]);}
+if(r<0.5){var d=pick([6,4,7,3]),base=d*100000;var right=[d*10000,d*10000+rnd(1,9)*1000];var wrong=[d*1000,d*100000,d*100];var opts=shuffle(right.concat(wrong)).map(comma);var ans=right.map(function(v){return opts.indexOf(comma(v));}).filter(function(i){return i>=0;});return {q:"Select every number where the digit "+d+" is worth 1/10 of the "+d+" in "+comma(base),type:"multi",options:opts,ans:ans};}
+if(r<0.75){var c=pick([2400000,560000,78000]);return {q:"What number is 1/10 of "+comma(c)+"?",type:"num",ans:N(c/10)};}
+return orderQ([rnd(100000,999999),rnd(100000,999999),rnd(100000,999999)],"greatest to least");}
+function m2(L){if(L===1){var a=rnd(11,29),b=rnd(2,6);return {q:a+" \u00d7 "+b,type:"num",ans:N(a*b)};}
+if(L===2){if(Math.random()<0.6){var c=rnd(102,499),d=rnd(3,9);return {q:comma(c)+" \u00d7 "+d,type:"num",ans:N(c*d)};}
+var s=rnd(6,14);return {q:"A square garden has sides "+s+" feet long. What is its area, in square feet?",type:"num",ans:N(s*s)};}
+if(Math.random()<0.6){var e=rnd(112,899),f=rnd(12,39);return {q:comma(e)+" \u00d7 "+f,type:"num",ans:N(e*f)};}
+var rows=rnd(14,28),per=rnd(12,25);return {q:"A hall has "+rows+" rows with "+per+" seats in each row. How many seats in all?",type:"num",ans:N(rows*per)};}
+function m3(L){if(L===1){var d=rnd(2,7),q=rnd(4,15);return {q:(d*q)+" \u00f7 "+d,type:"num",ans:N(q)};}
+if(L===2){if(Math.random()<0.6){var d2=rnd(3,9),q2=rnd(20,90);return {q:comma(d2*q2)+" \u00f7 "+d2,type:"num",ans:N(q2)};}
+var t=rnd(4,9),o=rnd(5,12);return {q:"Portia has "+(t*o)+" postcards. That is "+t+" times as many as Jonathan. How many does Jonathan have?",type:"num",ans:N(o)};}
+if(Math.random()<0.6){var d3=rnd(12,32),q3=rnd(14,89);return {q:comma(d3*q3)+" \u00f7 "+d3,type:"num",ans:N(q3)};}
+var boxes=rnd(14,26),each=rnd(12,30);return {q:comma(boxes*each)+" books are packed into boxes of "+each+". How many boxes?",type:"num",ans:N(boxes)};}
+function m4(L){if(L===1){if(Math.random()<0.5){var v=r2(rnd(11,89)/10,1);return {q:"Round "+v+" to the nearest whole number",type:"num",ans:N(Math.round(v))};}
+var a=r2(rnd(11,99)/10,1),b=r2(rnd(11,99)/10,1);if(a===b)return m4(1);return {q:"Which is greater?",type:"choice",options:[String(a),String(b)],ans:a>b?0:1};}
+if(L===2){if(Math.random()<0.5){var c=r2(rnd(100,999)/100);return {q:"Round "+c+" to the nearest tenth",type:"num",ans:N(r2(c,1))};}
+var n=r2(rnd(11,99)/10,1);return {q:n+" \u00d7 10",type:"num",ans:N(r2(n*10))};}
+if(Math.random()<0.5){var w=r2(rnd(1000,9999)/1000,3);return {q:"Round "+w+" to the nearest hundredth",type:"num",ans:N(r2(w,2))};}
+var nums=[r2(rnd(100,999)/100),r2(rnd(100,999)/100),r2(rnd(100,999)/100)];var opts=shuffle(nums.map(String));var ans=nums.slice().sort(function(x,y){return x-y;}).map(function(v){return opts.indexOf(String(v));});return {q:"Put in order from least to greatest",type:"order",options:opts,ans:ans};}
+function m5(L){if(L===1){var a=r2(rnd(11,89)/10,1),b=r2(rnd(11,89)/10,1);return Math.random()<0.5?{q:a+" + "+b,type:"num",ans:N(r2(a+b))}:{q:r2(a+b)+" \u2212 "+b,type:"num",ans:N(a)};}
+if(L===2){var c=r2(rnd(150,999)/100),d=r2(rnd(150,999)/100);return Math.random()<0.5?{q:c+" + "+d,type:"num",ans:N(r2(c+d))}:{q:r2(c+d)+" \u2212 "+d,type:"num",ans:N(c)};}
+if(Math.random()<0.6){var e=r2(rnd(1500,9999)/100),f=r2(rnd(150,1400)/100);return {q:e+" \u2212 "+f,type:"num",ans:N(r2(e-f))};}
+var price=r2(rnd(150,900)/100),paid=rnd(10,20);return {q:"A snack costs $"+price.toFixed(2)+". You pay with $"+paid+". How much change? (just the number)",type:"num",ans:N(r2(paid-price))};}
+function m6(L){if(L===1){var a=r2(rnd(2,9)/10,1),b=rnd(2,9);return {q:a+" \u00d7 "+b,type:"num",ans:N(r2(a*b))};}
+if(L===2){var c=r2(rnd(11,99)/10,1),d=rnd(2,9);return {q:c+" \u00d7 "+d,type:"num",ans:N(r2(c*d))};}
+if(Math.random()<0.5){var e=r2(rnd(11,99)/10,1),f=r2(rnd(11,99)/10,1);return {q:e+" \u00d7 "+f,type:"num",ans:N(r2(e*f))};}
+var div=rnd(2,9),q=r2(rnd(11,99)/10,1);return {q:r2(q*div)+" \u00f7 "+div,type:"num",ans:N(q)};}
+function m7(L){if(L===1){var d=pick([3,4,5,6,8]),a=rnd(1,d-2),b=rnd(1,d-1-a);return {q:a+"/"+d+" + "+b+"/"+d,type:"num",ans:F(a+b,d)};}
+if(L===2){var s=pick([2,3,4]),m=pick([2,3]),big=s*m,n1=rnd(1,s-1),n2=rnd(1,big-1);return {q:n1+"/"+s+" + "+n2+"/"+big,type:"num",ans:F(n1*m+n2,big)};}
+var ds=[2,3,4,5,6,8],d1=pick(ds),d2=pick(ds.filter(function(x){return x!==d1;}));var a2=rnd(1,d1-1),b2=rnd(1,d2-1),add=Math.random()<0.6;var n=add?a2*d2+b2*d1:a2*d2-b2*d1;if(!add&&n<=0)return m7(3);return {q:a2+"/"+d1+" "+(add?"+":"\u2212")+" "+b2+"/"+d2,type:"num",ans:F(n,d1*d2)};}
+function m8(L){if(L===1){var d=pick([2,3,4,5]),w=d*rnd(2,6);return {q:"1/"+d+" of "+w,type:"num",ans:N(w/d)};}
+if(L===2){if(Math.random()<0.5){var d2=pick([2,3,4,5,6]),n=rnd(2,d2-1),w2=d2*rnd(2,8);return {q:n+"/"+d2+" of "+w2,type:"num",ans:N(w2/d2*n)};}
+var a=pick([2,3,4]),b=pick([2,3,4]);return {q:"1/"+a+" \u00d7 1/"+b,type:"num",ans:F(1,a*b)};}
+if(Math.random()<0.6){var e=pick([2,3,4,5,6]),f=pick([2,3,4,5]),n1=rnd(1,e-1),n2=rnd(1,f-1);return {q:n1+"/"+e+" \u00d7 "+n2+"/"+f,type:"num",ans:F(n1*n2,e*f)};}
+var g=pick([2,3,4,5]),h=rnd(1,g-1),w3=rnd(2,5);return {q:h+"/"+g+" \u00f7 "+w3,type:"num",ans:F(h,g*w3)};}
+function m9(L){if(L===1){var l=rnd(2,5),w=rnd(2,5),h=rnd(2,4);return {q:"Volume of a prism "+l+" \u00d7 "+w+" \u00d7 "+h,type:"num",ans:N(l*w*h)};}
+if(L===2){var l2=rnd(3,9),w2=rnd(3,9),h2=rnd(2,7);return {q:"A box is "+l2+" cm long, "+w2+" cm wide, and "+h2+" cm tall. What is its volume in cubic cm?",type:"num",ans:N(l2*w2*h2)};}
+if(Math.random()<0.5){var a=rnd(3,8),b=rnd(3,8),c=rnd(2,6),d=rnd(2,5),e=rnd(2,5),f=rnd(2,4);return {q:"Two prisms joined: "+a+"\u00d7"+b+"\u00d7"+c+" and "+d+"\u00d7"+e+"\u00d7"+f+". Total volume?",type:"num",ans:N(a*b*c+d*e*f)};}
+var g=rnd(3,9),h3=rnd(3,9),v=g*h3*rnd(2,8);return {q:"A prism has volume "+v+" and a base of "+g+" \u00d7 "+h3+". What is its height?",type:"num",ans:N(v/(g*h3))};}
+function m10(L){if(L===1){var c=pick([["m","cm",100],["ft","in",12],["yd","ft",3],["km","m",1000],["L","mL",1000]]);return {q:"1 "+c[0]+" = ? "+c[1],type:"num",ans:N(c[2])};}
+if(L===2){if(Math.random()<0.6){var c2=pick([["m","cm",100],["ft","in",12],["lb","oz",16],["gal","qt",4],["kg","g",1000]]),n=rnd(2,9);return {q:n+" "+c2[0]+" = ? "+c2[1],type:"num",ans:N(n*c2[2])};}
+var b=rnd(3,15);return {q:"Mean of "+[b,b+1,b-1].join(", "),type:"num",ans:N(b)};}
+if(Math.random()<0.5){var c3=pick([["km","m",1000],["kg","g",1000],["L","mL",1000]]),n3=r2(rnd(15,95)/10,1);return {q:n3+" "+c3[0]+" = ? "+c3[1],type:"num",ans:N(r2(n3*c3[2]))};}
+var m=rnd(5,20),a=rnd(1,3),b2=rnd(1,4);return {q:"Mean of "+[m-a,m+a,m-b2,m+b2].join(", "),type:"num",ans:N(m)};}
+function m11(L){if(L===1){var x=rnd(1,9),y=rnd(1,9),mv=rnd(1,5);return {q:"Start at ("+x+", "+y+") and move right "+mv+". What is the new x?",type:"num",ans:N(x+mv)};}
+if(L===2){var s=rnd(2,6),st=rnd(2,6);return {q:"Pattern: "+[s,s+st,s+2*st,s+3*st].join(", ")+", ... What comes next?",type:"num",ans:N(s+4*st)};}
+if(Math.random()<0.5){var a=rnd(1,4),f=rnd(2,4);return {q:"Pattern: "+[a,a*f,a*f*f].join(", ")+", ... What comes next?",type:"num",ans:N(a*f*f*f)};}
+var x1=rnd(1,5),x2=rnd(6,12),y2=rnd(1,9);return {q:"How far apart are ("+x1+", "+y2+") and ("+x2+", "+y2+")?",type:"num",ans:N(x2-x1)};}
+function m12(L){if(L===1){var a=rnd(2,9),b=rnd(2,5),c=rnd(2,5);return {q:a+" + "+b+" \u00d7 "+c,type:"num",ans:N(a+b*c)};}
+if(L===2){if(Math.random()<0.5){var d=rnd(2,12),e=rnd(2,8),f=rnd(2,5);return {q:"("+d+" + "+e+") \u00d7 "+f,type:"num",ans:N((d+e)*f)};}
+var g=rnd(15,40),h=rnd(2,8),i=rnd(2,5);return {q:g+" \u2212 "+h+" \u00d7 "+i,type:"num",ans:N(g-h*i)};}
+if(Math.random()<0.5){var j=rnd(3,9),k=rnd(2,6),l=rnd(2,9),m=rnd(2,20);return {q:j+" \u00d7 "+k+" \u2212 "+l+" + "+m,type:"num",ans:N(j*k-l+m)};}
+var n=rnd(2,12),o=rnd(2,6),p=rnd(2,9);return {q:(n*o*p)+" \u00f7 ("+o+" \u00d7 "+p+")",type:"num",ans:N(n)};}
+var BOSSES=[
+{id:0,mod:"Module 1",name:"The Tenfold",face:"\uD83D\uDD1F",hp:130,hit:10,time:30,gen:m1,reward:60,topic:"10-to-1 place value relationship",taunt:"Every step is ten times the last.",hint:"Moving one place LEFT makes a digit 10 times as much. Moving one place RIGHT makes it 1/10 as much. '10 times as much as 50' means 50 \u00d7 10 = 500. '1/10 of 4,000' means 4,000 \u00f7 10 = 400."},
+{id:1,mod:"Module 2",name:"Grimtooth",face:"\uD83D\uDC79",hp:180,hit:12,time:35,gen:m2,reward:90,topic:"Multiplying multi-digit numbers",taunt:"Bigger numbers. Same rules.",hint:"Break it apart: 342 \u00d7 23 = (342 \u00d7 20) + (342 \u00d7 3). For the area of a square, multiply the side by itself."},
+{id:2,mod:"Module 3",name:"The Divider",face:"\uD83D\uDDE1\uFE0F",hp:210,hit:13,time:35,gen:m3,reward:110,topic:"Dividing multi-digit numbers",taunt:"I split everything.",hint:"Ask how many times the divisor fits, one digit at a time. If something is '8 times as many' as another, divide to find the smaller one."},
+{id:3,mod:"Module 4",name:"Pointclaw",face:"\uD83E\uDD82",hp:240,hit:14,time:30,gen:m4,reward:130,topic:"Decimal place value, rounding, comparing",taunt:"Watch the point.",hint:"To round, look at the digit just after the place you want \u2014 5 or more rounds up. To compare, check the biggest place first."},
+{id:4,mod:"Module 5",name:"The Aligner",face:"\uD83D\uDCD0",hp:260,hit:15,time:30,gen:m5,reward:150,topic:"Adding & subtracting decimals",taunt:"Line up. Or fall down.",hint:"Line up the decimal points, then add or subtract like normal. Fill empty spots with zeros if it helps."},
+{id:5,mod:"Module 6",name:"Shiftmaw",face:"\uD83C\uDF00",hp:290,hit:16,time:32,gen:m6,reward:170,topic:"Multiplying & dividing decimals",taunt:"Count your places carefully.",hint:"Multiplying: ignore the points, multiply, then count how many decimal places were in both numbers together and put that many in your answer."},
+{id:6,mod:"Module 7",name:"Fracture",face:"\uD83D\uDC09",hp:310,hit:17,time:38,gen:m7,reward:190,topic:"Adding & subtracting fractions",taunt:"Nothing here shares a bottom.",hint:"Same bottom? Just add the tops. Different bottoms? Make them match first, then add the tops. Type answers like 5/12 \u2014 any equal fraction counts."},
+{id:7,mod:"Module 8",name:"The Splitter",face:"\u2702\uFE0F",hp:340,hit:18,time:36,gen:m8,reward:210,topic:"Multiplying & dividing fractions",taunt:"I make things smaller.",hint:"'1/4 of 12' means 12 \u00f7 4. Multiply fractions straight across: tops \u00d7 tops, bottoms \u00d7 bottoms. Dividing by a whole number makes the bottom bigger."},
+{id:8,mod:"Module 9",name:"Cubewarden",face:"\uD83E\uDDCA",hp:360,hit:19,time:32,gen:m9,reward:230,topic:"Volume of prisms",taunt:"Fill me if you can.",hint:"Volume = length \u00d7 width \u00d7 height. For two joined prisms, find each volume and add. To find a missing height, divide the volume by the base area."},
+{id:9,mod:"Module 10",name:"The Measurer",face:"\u2696\uFE0F",hp:380,hit:20,time:32,gen:m10,reward:250,topic:"Unit conversion & mean",taunt:"Convert, or be converted.",hint:"Big unit to small unit means multiply. 1 m = 100 cm, 1 km = 1,000 m, 1 ft = 12 in, 1 lb = 16 oz. Mean = add them all, divide by how many."},
+{id:10,mod:"Module 11",name:"Gridstalker",face:"\uD83D\uDCCD",hp:400,hit:21,time:32,gen:m11,reward:280,topic:"Coordinate grid & patterns",taunt:"I know exactly where you are.",hint:"In (x, y) the first number is across, the second is up. For patterns, find what happens each step \u2014 adding the same amount, or multiplying by the same amount."},
+{id:11,mod:"Module 12",name:"OPERATOR",face:"\uD83D\uDC41\uFE0F",hp:460,hit:23,time:32,gen:m12,reward:450,topic:"Expressions & order of operations",taunt:"Order matters. You do not.",hint:"Parentheses first, then Multiply and Divide left to right, then Add and Subtract left to right. Never just go straight across."}];
+var GEAR=[{id:"g1",name:"Chalk Blade",cost:80,dmg:5,desc:"+5 damage every hit"},{id:"g2",name:"Protractor Shield",cost:120,def:7,desc:"Take 7 less damage"},{id:"g3",name:"Compass of Focus",cost:180,time:8,desc:"+8 seconds per problem"},{id:"g4",name:"Prime Hammer",cost:320,dmg:14,desc:"+14 damage every hit"},{id:"g5",name:"Base-Ten Gauntlet",cost:500,dmg:10,def:8,desc:"+10 damage, take 8 less"},{id:"g6",name:"Crown of Powers",cost:900,dmg:20,def:12,time:6,desc:"+20 dmg, \u221212 taken, +6s"}];
+var KEY="intoquest.save.v1";
+var saveOK=true;
+function loadSave(){try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);return {coins:o.coins||0,cleared:o.cleared||[],gear:o.gear||[],best:o.best||0,easyMode:o.easyMode!==false};}}catch(e){saveOK=false;}return {coins:0,cleared:[],gear:[],best:0,easyMode:true};}
+function writeSave(){try{localStorage.setItem(KEY,JSON.stringify(S.save));saveOK=true;}catch(e){saveOK=false;}}
+var S={screen:"map",save:loadSave(),boss:null,prob:null,level:1,entry:"",chosen:null,selected:[],ordered:[],bossHp:0,myHp:100,streak:0,best:0,msg:"",t:0,limit:0,flash:null,fb:null,right:0,total:0,timer:null};
+function bonus(){var b={dmg:0,def:0,time:0};S.save.gear.forEach(function(id){var g=GEAR.filter(function(x){return x.id===id;})[0];if(g){b.dmg+=g.dmg||0;b.def+=g.def||0;b.time+=g.time||0;}});return b;}
+function resetAnswer(){S.entry="";S.chosen=null;S.selected=[];S.ordered=[];S.fb=null;}
+function checkNum(entry,ans){var s=(entry||"").trim();if(!s)return false;
+if(s.indexOf("/")>=0){var p=s.split("/"),n=parseFloat(p[0]),d=parseFloat(p[1]);if(!isFinite(n)||!isFinite(d)||d===0)return false;if(ans.t==="f")return n*ans.d===ans.n*d;return Math.abs(n/d-ans.v)<0.0001;}
+var v=parseFloat(s);if(!isFinite(v))return false;if(ans.t==="f")return Math.abs(v-ans.n/ans.d)<0.0001;return Math.abs(v-ans.v)<0.0001;}
+function sameSet(a,b){if(a.length!==b.length)return false;var x=a.slice().sort(),y=b.slice().sort();return x.every(function(v,i){return v===y[i];});}
+function sameOrder(a,b){return a.length===b.length&&a.every(function(v,i){return v===b[i];});}
+function isCorrect(){var p=S.prob;if(p.type==="num")return checkNum(S.entry,p.ans);if(p.type==="choice")return S.chosen===p.ans;if(p.type==="multi")return sameSet(S.selected,p.ans);if(p.type==="order")return sameOrder(S.ordered,p.ans);return false;}
+function answerText(){var p=S.prob;if(p.type==="num")return p.ans.t==="f"?p.ans.n+"/"+p.ans.d:String(p.ans.v);if(p.type==="choice")return p.options[p.ans];if(p.type==="multi")return p.ans.map(function(i){return p.options[i];}).join(", ");return p.ans.map(function(i){return p.options[i];}).join(" \u2192 ");}
+function hasAnswer(){var p=S.prob;if(p.type==="num")return S.entry!=="";if(p.type==="choice")return S.chosen!==null;if(p.type==="multi")return S.selected.length>0;return S.ordered.length===p.options.length;}
+var LEVELS=["Easy","Medium","Hard"];
+function levelFor(hp){var p=hp/S.boss.hp;if(S.save.easyMode)return p>0.4?1:2;return p>0.66?1:(p>0.33?2:3);}
+function answerHTML(locked){var p=S.prob,h="";
+if(p.type==="num"){var keys=["1","2","3","4","5","6","7","8","9",".","0","/"];h+='<div class="pad">';keys.forEach(function(k){h+='<button class="key'+(k==="."||k==="/"?" alt":"")+'" data-key="'+k+'"'+(locked?" disabled":"")+'>'+k+'</button>';});h+='<button class="key wide alt" data-clear="1"'+(locked?" disabled":"")+'>clear</button></div>';return h;}
+if(p.type==="choice"){h+='<div class="opts">';p.options.forEach(function(o,i){h+='<button class="opt'+(S.chosen===i?" on":"")+'" data-choice="'+i+'"'+(locked?" disabled":"")+'>'+esc(o)+'</button>';});return h+'</div>';}
+if(p.type==="multi"){h+='<div class="opts"><p class="tip">Tap every one that works.</p>';p.options.forEach(function(o,i){var on=S.selected.indexOf(i)>=0;h+='<button class="opt'+(on?" on":"")+'" data-multi="'+i+'"'+(locked?" disabled":"")+'><span class="box">'+(on?"\u2713":"")+'</span>'+esc(o)+'</button>';});return h+'</div>';}
+h+='<div class="opts"><p class="tip">Tap them in the right order.</p>';p.options.forEach(function(o,i){var pos=S.ordered.indexOf(i);h+='<button class="opt'+(pos>=0?" on":"")+'" data-order="'+i+'"'+(locked?" disabled":"")+'><span class="box">'+(pos>=0?pos+1:"")+'</span>'+esc(o)+'</button>';});return h+'</div>';}
+function problemHTML(showLevel){var p=S.prob,h='<div class="problem">';if(showLevel)h+='<div class="lvltag">'+LEVELS[levelFor(S.bossHp)-1]+'</div>';h+='<div class="q'+(p.q.length>40?" small":"")+'">'+esc(p.q)+'</div>';if(p.type==="num")h+='<div class="entry">'+(S.entry===""?"?":esc(S.entry))+'</div>';return h+'</div>';}
+function renderMap(){var b=bonus(),s=S.save;
+var h='<div class="head"><h1 class="title">INTO<span>QUEST</span></h1><p class="sub">Grade 5 \u00b7 One boss per module</p></div>';
+h+='<div class="savebar '+(saveOK?"ok":"bad")+'">'+(saveOK?"Progress saves automatically on this device":"Saving is blocked \u2014 turn off Private Browsing")+'</div>';
+h+='<div class="stats"><div class="stat gold"><div class="v tiny">'+comma(s.coins)+'</div><div class="l">Coins</div></div><div class="stat cyan"><div class="v">'+s.cleared.length+'/12</div><div class="l">Cleared</div></div><div class="stat pink"><div class="v">'+s.best+'</div><div class="l">Streak</div></div></div>';
+h+='<button class="mode'+(s.easyMode?" on":"")+'" data-act="easy"><span class="dot"></span>'+(s.easyMode?"Warm-up ON \u2014 problems stay easier":"Warm-up OFF \u2014 problems get harder as the boss weakens")+'</button>';
+if(b.dmg||b.def||b.time){h+='<p class="note" style="color:var(--cyan);opacity:.9">Gear: '+(b.dmg?"+"+b.dmg+" dmg ":"")+(b.def?"\u00b7 \u2212"+b.def+" taken ":"")+(b.time?"\u00b7 +"+b.time+"s":"")+'</p>';}
+h+='<div class="list">';
+BOSSES.forEach(function(boss,i){var done=s.cleared.indexOf(boss.id)>=0;var locked=i>0&&s.cleared.indexOf(BOSSES[i-1].id)<0;
+h+='<div class="row'+(locked?" locked":"")+(done?" done":"")+'"><span class="face">'+(locked?"\uD83D\uDD12":boss.face)+'</span><span class="txt"><span class="modtag">'+boss.mod+'</span><span class="nm">'+esc(boss.name)+'</span><span class="meta">'+esc(boss.topic)+'</span></span><span class="acts">'+(done?'<span class="chk">\u2713</span>':"")+'<button class="mini" data-train="'+boss.id+'">Train</button><button class="mini solid" data-fight="'+boss.id+'"'+(locked?" disabled":"")+'>Fight</button></span></div>';});
+h+='</div><p class="note">Train is free practice \u2014 pick your level, no timer, no damage, shows the answer.</p>';
+h+='<div class="btnrow"><button class="btn gold" data-act="shop">Shop</button><button class="btn ghost" data-act="reset">Start over</button></div>';
+return h;}
+function renderShop(){var s=S.save;var h='<div class="head"><h2>Shop</h2><p class="sub">'+comma(s.coins)+' coins</p></div><div class="list">';
+GEAR.forEach(function(g){var owned=s.gear.indexOf(g.id)>=0,afford=s.coins>=g.cost;h+='<div class="row'+(owned?" done":"")+'"><span class="txt"><span class="nm">'+esc(g.name)+'</span><span class="meta">'+esc(g.desc)+'</span></span>'+(owned?'<span class="chk">OWNED</span>':'<button class="buy" data-buy="'+g.id+'"'+(afford?"":" disabled")+'>'+g.cost+'</button>')+'</div>';});
+return h+'</div><button class="btn ghost" data-act="map">Back</button>';}
+function renderTrain(){var bo=S.boss;var h='<div class="head"><span class="modtag">'+bo.mod+'</span><h2>Train</h2><p class="sub">'+esc(bo.topic)+'</p></div><div class="levels">';
+LEVELS.forEach(function(n,i){h+='<button class="lvl'+(S.level===i+1?" on":"")+'" data-lvl="'+(i+1)+'">'+n+'</button>';});
+h+='</div><div class="hint"><b>How to do it:</b> '+esc(bo.hint)+'</div>';
+h+=problemHTML(false);
+if(S.fb)h+='<p class="fb '+(S.fb.ok?"ok":"bad")+'">'+(S.fb.ok?"Correct.":"Not quite \u2014 the answer is "+esc(S.fb.a)+".")+'</p>';
+h+=answerHTML(!!S.fb);
+h+='<button class="attack train" data-act="check">'+(S.fb?"Next problem":"Check")+'</button>';
+h+='<div class="myrow"><span class="hpnum sm">'+S.right+' / '+S.total+' correct</span><button class="flee" data-act="map">Back to map</button></div>';
+return h;}
+function renderBattle(){var bo=S.boss,pct=(S.bossHp/bo.hp)*100;
+var h='<div class="bossbar"><div class="bbtop"><span class="face big">'+bo.face+'</span><span class="txt"><span class="modtag">'+bo.mod+'</span><span class="nm">'+esc(bo.name)+'</span></span><span class="hpnum">'+S.bossHp+'<span class="dim">/'+bo.hp+'</span></span></div><div class="numline"><div class="nlfill" style="width:'+pct+'%"></div>';
+[0,0.25,0.5,0.75,1].forEach(function(p){h+='<div class="tickwrap" style="left:'+(p*100)+'%"><div class="tick"></div><div class="ticklab">'+Math.round(bo.hp*p)+'</div></div>';});
+h+='</div></div><p class="msg">'+esc(S.msg)+'</p>';
+h+=problemHTML(true);
+h+='<div class="timer"><div class="tfill" style="width:'+((S.t/S.limit)*100)+'%"></div></div>';
+h+=answerHTML(false);
+h+='<button class="attack" data-act="attack">Attack</button>';
+h+='<div class="myrow"><div class="myhp"><div class="myfill" style="width:'+S.myHp+'%"></div></div><span class="hpnum sm">'+S.myHp+' HP</span><button class="flee" data-act="map">Retreat</button></div>';
+return h;}
+function renderEnd(win){var bo=S.boss;return '<div class="end"><div class="endface">'+(win?bo.face:"\uD83D\uDC80")+'</div><h2>'+(win?esc(bo.name)+" falls":"You went down")+'</h2><p class="sub">'+(win?"+"+bo.reward+" coins \u00b7 best streak "+S.best:"Best streak "+S.best+". Train this module on Easy, then come back.")+'</p><button class="btn gold" data-act="'+(win?"collect":"map")+'" style="margin-top:16px">'+(win?"Collect":"Back to map")+'</button></div>';}
+function render(){var app=document.getElementById("app"),h="";
+if(S.screen==="map")h=renderMap();else if(S.screen==="shop")h=renderShop();else if(S.screen==="train")h=renderTrain();else if(S.screen==="battle")h=renderBattle();else if(S.screen==="win")h=renderEnd(true);else if(S.screen==="lose")h=renderEnd(false);
+app.className=S.flash?("flash-"+S.flash):"";app.innerHTML=h;}
+function stopTimer(){if(S.timer){clearInterval(S.timer);S.timer=null;}}
+function startTimer(){stopTimer();S.timer=setInterval(function(){S.t=Math.max(0,+(S.t-0.1).toFixed(1));var f=document.querySelector(".tfill");if(f)f.style.width=((S.t/S.limit)*100)+"%";if(S.t<=0){takeHit("Out of time!");}},100);}
+function nextProblem(hp){S.prob=S.boss.gen(levelFor(hp));resetAnswer();S.t=S.limit;}
+function takeHit(why){var b=bonus(),dmg=Math.max(4,S.boss.hit-b.def);S.myHp=Math.max(0,S.myHp-dmg);S.streak=0;S.msg=why+" You take "+dmg+".";S.flash="hurt";setTimeout(function(){S.flash=null;},300);
+if(S.myHp<=0){stopTimer();S.screen="lose";}else nextProblem(S.bossHp);render();}
+function doAttack(){if(!hasAnswer())return;
+if(isCorrect()){var b=bonus();S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((18+b.dmg)*(1+Math.min(S.streak-1,5)*0.25));S.bossHp=Math.max(0,S.bossHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
+if(S.bossHp<=0){stopTimer();S.screen="win";}else nextProblem(S.bossHp);render();}
+else takeHit("Wrong \u2014 it was "+answerText()+".");}
+function startBattle(boss){S.boss=boss;S.bossHp=boss.hp;S.myHp=100;S.streak=0;S.best=0;S.limit=boss.time+bonus().time;S.t=S.limit;S.msg=boss.taunt;S.prob=boss.gen(1);resetAnswer();S.screen="battle";startTimer();render();}
+function collect(){var s=S.save,bo=S.boss;var first=s.cleared.indexOf(bo.id)<0;if(first)s.cleared.push(bo.id);s.coins+=first?bo.reward:Math.round(bo.reward/3);if(S.best>s.best)s.best=S.best;writeSave();S.screen="map";render();}
+document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+if(d.key!==undefined){S.entry=(S.entry+d.key).slice(0,12);render();return;}
+if(d.clear!==undefined){S.entry="";render();return;}
+if(d.choice!==undefined){S.chosen=+d.choice;render();return;}
+if(d.multi!==undefined){var i=+d.multi,k=S.selected.indexOf(i);if(k>=0)S.selected.splice(k,1);else S.selected.push(i);render();return;}
+if(d.order!==undefined){var j=+d.order,p=S.ordered.indexOf(j);if(p>=0)S.ordered.splice(p,1);else S.ordered.push(j);render();return;}
+if(d.lvl!==undefined){S.level=+d.lvl;S.prob=S.boss.gen(S.level);resetAnswer();render();return;}
+if(d.train!==undefined){S.boss=BOSSES[+d.train];S.level=1;S.prob=S.boss.gen(1);resetAnswer();S.right=0;S.total=0;S.screen="train";render();return;}
+if(d.fight!==undefined){startBattle(BOSSES[+d.fight]);return;}
+if(d.buy!==undefined){var g=GEAR.filter(function(x){return x.id===d.buy;})[0];if(g&&S.save.coins>=g.cost&&S.save.gear.indexOf(g.id)<0){S.save.coins-=g.cost;S.save.gear.push(g.id);writeSave();}render();return;}
+var a=d.act;
+if(a==="easy"){S.save.easyMode=!S.save.easyMode;writeSave();render();return;}
+if(a==="shop"){S.screen="shop";render();return;}
+if(a==="map"){stopTimer();S.screen="map";render();return;}
+if(a==="reset"){if(confirm("Erase all progress and start over?")){S.save={coins:0,cleared:[],gear:[],best:0,easyMode:true};writeSave();}render();return;}
+if(a==="attack"){doAttack();return;}
+if(a==="collect"){collect();return;}
+if(a==="check"){if(S.fb){S.prob=S.boss.gen(S.level);resetAnswer();render();return;}if(!hasAnswer())return;var ok=isCorrect();S.total++;if(ok)S.right++;S.fb=ok?{ok:true}:{ok:false,a:answerText()};render();return;}
+});
+render();
+</script></body></html>
