@@ -103,7 +103,7 @@ var shuffle=function(a){return a.map(function(v){return [Math.random(),v];}).sor
 var N=function(v){return {t:"n",v:v};};
 var F=function(n,d){var g=gcd(n,d);return {t:"f",n:n/g,d:d/g};};
 var esc=function(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});};
-function orderQ(nums,label){label=label||"least to greatest";var opts=shuffle(nums.map(comma));var sorted=nums.slice().sort(function(a,b){return a-b;}).map(comma);if(label!=="least to greatest")sorted.reverse();var ans=sorted.map(function(s){return opts.indexOf(s);});return {q:"Put in order from "+label,type:"order",options:opts,ans:ans};}
+function orderQ(nums,label){label=label||"least to greatest";var uq=[];nums.forEach(function(n){while(uq.indexOf(n)>=0)n++;uq.push(n);});nums=uq;var opts=shuffle(nums.map(comma));var sorted=nums.slice().sort(function(a,b){return a-b;}).map(comma);if(label!=="least to greatest")sorted.reverse();var ans=sorted.map(function(s){return opts.indexOf(s);});return {q:"Put in order from "+label,type:"order",options:opts,ans:ans};}
 function m1(L){var r=Math.random();
 if(L===1){if(r<0.4){var n=pick([50,20,90,300,700,40]);return {q:"What number is 10 times as much as "+comma(n)+"?",type:"num",ans:N(n*10)};}
 if(r<0.8){var n2=pick([400,3000,60,900,5000]);return {q:"What number is 1/10 of "+comma(n2)+"?",type:"num",ans:N(n2/10)};}
