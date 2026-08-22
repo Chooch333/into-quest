@@ -423,9 +423,9 @@ h+='<div class="twr R"><div class="flag red"><i></i></div><div class="twrbody"><
 h+='<div class="champ me"><div class="ear l"></div><div class="ear r"></div><div class="ball"></div><div class="eye l"></div><div class="eye r"></div><div class="smile"></div></div>';
 h+='<div class="champ foe'+(ph===1?" sentry":"")+'"><div class="ball"></div><div class="eye l"></div><div class="eye r"></div><div class="blush l"></div><div class="blush r"></div><div class="smile"></div><div class="sword">\uD83D\uDDE1\uFE0F</div></div>';
 h+='<div class="foebanner">'+bo.face+' \u00A0FOE '+ph+' OF 2</div>';
-h+='<div class="plate L"><div class="pname">'+esc(PLAYER)+'</div><div class="hpwrap"><div class="hpfill" style="width:'+S.myHp+'%"></div><div class="hptxt">'+S.myHp+' / 100</div></div>'+(S.shieldUp?'<div class="shieldup">\uD83D\uDEE1\uFE0F</div>':'')+'</div>';
-h+='<div class="plate R"><div class="pname">'+esc(foeName)+'</div><div class="hpwrap"><div class="hpfill" style="width:'+foepct+'%"></div><div class="hptxt">'+S.foeHp+' / '+foeMax+'</div></div></div>';
 return h+'</div>';}
+function vsBarHTML(){var bo=S.boss,ph=S.phase||2;var foeName=ph===1?"Tower Sentry":bo.name;var foeMax=ph===1?Math.round(bo.hp*0.4):bo.hp;var foepct=Math.max(0,Math.round(S.foeHp/foeMax*100));
+return '<div class="vsbar"><div class="plate L"><div class="pname">'+esc(PLAYER)+'</div><div class="hpwrap"><div class="hpfill" style="width:'+S.myHp+'%"></div><div class="hptxt">'+S.myHp+' / 100</div></div>'+(S.shieldUp?'<div class="shieldup">\uD83D\uDEE1\uFE0F</div>':'')+'</div><div class="plate R"><div class="pname">'+esc(foeName)+'</div><div class="hpwrap"><div class="hpfill" style="width:'+foepct+'%"></div><div class="hptxt">'+S.foeHp+' / '+foeMax+'</div></div></div></div>';}
 function itemsBarHTML(){var it=items(),h='<div class="items">';
 CONSUM.forEach(function(c){var n=it[c.id]||0;var dis=n<=0||(c.id==="bandage"&&S.myHp>=100)||(c.id==="shield"&&S.shieldUp);
 h+='<button class="item" data-item="'+c.id+'"'+(dis?" disabled":"")+'><span class="ic">'+c.ic+'</span><span class="itxt"><span class="inm">'+c.name.toUpperCase()+'</span><span class="ids">'+c.desc+'</span></span><span class="ct">x'+n+'</span></button>';});
