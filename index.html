@@ -254,6 +254,7 @@ function startBattle(boss){S.boss=boss;S.bossHp=boss.hp;S.myHp=100;S.streak=0;S.
 function collect(){var s=S.save,bo=S.boss;var first=s.cleared.indexOf(bo.id)<0;if(first)s.cleared.push(bo.id);s.coins+=first?bo.reward:Math.round(bo.reward/3);if(S.best>s.best)s.best=S.best;writeSave();S.screen="map";render();}
 document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
 if(d.key!==undefined){S.entry=(S.entry+d.key).slice(0,12);render();return;}
+if(d.back!==undefined){S.entry=S.entry.slice(0,-1);render();return;}
 if(d.clear!==undefined){S.entry="";render();return;}
 if(d.choice!==undefined){S.chosen=+d.choice;render();return;}
 if(d.multi!==undefined){var i=+d.multi,k=S.selected.indexOf(i);if(k>=0)S.selected.splice(k,1);else S.selected.push(i);render();return;}
