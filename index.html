@@ -247,7 +247,7 @@ function nextProblem(hp){S.prob=S.boss.gen(levelFor(hp));resetAnswer();S.t=S.lim
 function takeHit(why){var b=bonus(),dmg=Math.max(4,S.boss.hit-b.def);S.myHp=Math.max(0,S.myHp-dmg);S.streak=0;S.msg=why+" You take "+dmg+".";S.showHint=true;S.flash="hurt";setTimeout(function(){S.flash=null;},300);
 if(S.myHp<=0){stopTimer();if(S.best>S.save.best){S.save.best=S.best;writeSave();}S.screen="lose";}else nextProblem(S.bossHp);render();}
 function doAttack(){if(!hasAnswer())return;
-if(isCorrect()){var b=bonus();S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((22+b.dmg)*(1+Math.min(S.streak-1,6)*0.30));S.bossHp=Math.max(0,S.bossHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
+if(isCorrect()){var b=bonus();S.showHint=false;S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((22+b.dmg)*(1+Math.min(S.streak-1,6)*0.30));S.bossHp=Math.max(0,S.bossHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
 if(S.bossHp<=0){stopTimer();S.screen="win";}else nextProblem(S.bossHp);render();}
 else takeHit("Wrong \u2014 it was "+answerText()+".");}
 function startBattle(boss){S.boss=boss;S.bossHp=boss.hp;S.myHp=100;S.streak=0;S.best=0;S.limit=boss.time+bonus().time;S.t=S.limit;S.msg=boss.taunt;S.prob=boss.gen(1);resetAnswer();S.screen="battle";startTimer();render();}
