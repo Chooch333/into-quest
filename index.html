@@ -244,8 +244,8 @@ app.className=S.flash?("flash-"+S.flash):"";app.innerHTML=h;}
 function stopTimer(){if(S.timer){clearInterval(S.timer);S.timer=null;}}
 function startTimer(){stopTimer();S.timer=setInterval(function(){S.t=Math.max(0,+(S.t-0.1).toFixed(1));var f=document.querySelector(".tfill");if(f)f.style.width=((S.t/S.limit)*100)+"%";if(S.t<=0){takeHit("Out of time!");}},100);}
 function nextProblem(hp){S.prob=S.boss.gen(levelFor(hp));resetAnswer();S.t=S.limit;}
-function takeHit(why){var b=bonus(),dmg=Math.max(4,S.boss.hit-b.def);S.myHp=Math.max(0,S.myHp-dmg);S.streak=0;S.msg=why+" You take "+dmg+".";S.flash="hurt";setTimeout(function(){S.flash=null;},300);
-if(S.myHp<=0){stopTimer();S.screen="lose";}else nextProblem(S.bossHp);render();}
+function takeHit(why){var b=bonus(),dmg=Math.max(4,S.boss.hit-b.def);S.myHp=Math.max(0,S.myHp-dmg);S.streak=0;S.msg=why+" You take "+dmg+".";S.showHint=true;S.flash="hurt";setTimeout(function(){S.flash=null;},300);
+if(S.myHp<=0){stopTimer();if(S.best>S.save.best){S.save.best=S.best;writeSave();}S.screen="lose";}else nextProblem(S.bossHp);render();}
 function doAttack(){if(!hasAnswer())return;
 if(isCorrect()){var b=bonus();S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((22+b.dmg)*(1+Math.min(S.streak-1,6)*0.30));S.bossHp=Math.max(0,S.bossHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
 if(S.bossHp<=0){stopTimer();S.screen="win";}else nextProblem(S.bossHp);render();}
