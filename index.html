@@ -231,6 +231,7 @@ function renderBattle(){var bo=S.boss,pct=(S.bossHp/bo.hp)*100;
 var h='<div class="bossbar"><div class="bbtop"><span class="face big">'+bo.face+'</span><span class="txt"><span class="modtag">'+bo.mod+'</span><span class="nm">'+esc(bo.name)+'</span></span><span class="hpnum">'+S.bossHp+'<span class="dim">/'+bo.hp+'</span></span></div><div class="numline"><div class="nlfill" style="width:'+pct+'%"></div>';
 [0,0.25,0.5,0.75,1].forEach(function(p){h+='<div class="tickwrap" style="left:'+(p*100)+'%"><div class="tick"></div><div class="ticklab">'+Math.round(bo.hp*p)+'</div></div>';});
 h+='</div></div><p class="msg">'+esc(S.msg)+'</p>';
+if(S.showHint)h+='<div class="hint"><b>Remember:</b> '+esc(bo.hint)+'</div>';
 h+=problemHTML(true);
 h+='<div class="timer"><div class="tfill" style="width:'+((S.t/S.limit)*100)+'%"></div></div>';
 h+=answerHTML(false);
