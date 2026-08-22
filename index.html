@@ -446,7 +446,7 @@ else nextProblem();
 render();}
 else takeHit("Wrong \u2014 it was "+answerText()+".");}
 function renderBattle(){var bo=S.boss;
-var h='<h1 class="title">INTO-QUEST: SIEGE</h1>'+trackHTML(bo.id)+sceneHTML();
+var h='<h1 class="title">INTO-QUEST: SIEGE</h1>'+trackHTML(bo.id)+sceneHTML()+vsBarHTML();
 h+='<div class="topic">'+esc(bo.tag||bo.mod)+' \u2022 '+LEVELS[curLevel()-1].toUpperCase()+'</div>';
 h+='<div class="parch"><div class="q'+(S.prob.q.length>40?" small":"")+'">'+esc(S.prob.q)+'</div>';
 h+='<div class="timer"><div class="tfill" style="width:'+((S.t/S.limit)*100)+'%"></div></div>';
