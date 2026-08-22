@@ -185,9 +185,11 @@ function writeSave(){try{localStorage.setItem(KEY,JSON.stringify(S.save));saveOK
 var S={screen:"map",save:loadSave(),boss:null,prob:null,level:1,entry:"",chosen:null,selected:[],ordered:[],bossHp:0,myHp:100,streak:0,best:0,msg:"",t:0,limit:0,flash:null,fb:null,right:0,total:0,timer:null};
 function bonus(){var b={dmg:0,def:0,time:0};S.save.gear.forEach(function(id){var g=GEAR.filter(function(x){return x.id===id;})[0];if(g){b.dmg+=g.dmg||0;b.def+=g.def||0;b.time+=g.time||0;}});return b;}
 function resetAnswer(){S.entry="";S.chosen=null;S.selected=[];S.ordered=[];S.fb=null;}
-function checkNum(entry,ans){var s=(entry||"").trim();if(!s)return false;
-if(s.indexOf("/")>=0){var p=s.split("/"),n=parseFloat(p[0]),d=parseFloat(p[1]);if(!isFinite(n)||!isFinite(d)||d===0)return false;if(ans.t==="f")return n*ans.d===ans.n*d;return Math.abs(n/d-ans.v)<0.0001;}
-var v=parseFloat(s);if(!isFinite(v))return false;if(ans.t==="f")return Math.abs(v-ans.n/ans.d)<0.0001;return Math.abs(v-ans.v)<0.0001;}
+function checkNum(entry,ans){var s=(entry||"").trim().replace(/\s+/g," ");if(!s)return false;
+var target=ans.t==="f"?ans.n/ans.d:ans.v,whole=0,fr=s;
+if(s.indexOf(" ")>0&&s.indexOf("/")>0){var mp=s.split(" ");whole=parseFloat(mp[0]);fr=mp.slice(1).join("");if(!isFinite(whole))return false;}
+if(fr.indexOf("/")>=0){var p=fr.split("/"),n=parseFloat(p[0]),d=parseFloat(p[1]);if(!isFinite(n)||!isFinite(d)||d===0)return false;return Math.abs(whole+n/d-target)<0.0001;}
+var v=parseFloat(fr);if(!isFinite(v))return false;return Math.abs(v-target)<0.0001;}
 function sameSet(a,b){if(a.length!==b.length)return false;var x=a.slice().sort(),y=b.slice().sort();return x.every(function(v,i){return v===y[i];});}
 function sameOrder(a,b){return a.length===b.length&&a.every(function(v,i){return v===b[i];});}
 function isCorrect(){var p=S.prob;if(p.type==="num")return checkNum(S.entry,p.ans);if(p.type==="choice")return S.chosen===p.ans;if(p.type==="multi")return sameSet(S.selected,p.ans);if(p.type==="order")return sameOrder(S.ordered,p.ans);return false;}
