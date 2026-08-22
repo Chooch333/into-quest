@@ -128,7 +128,7 @@ function m4(L){if(L===1){if(Math.random()<0.5){var v=r2((rnd(1,8)*10+rnd(1,9))/1
 var a=r2(rnd(11,99)/10,1),b=r2(rnd(11,99)/10,1);if(a===b)return m4(1);return {q:"Which is greater?",type:"choice",options:[String(a),String(b)],ans:a>b?0:1};}
 if(L===2){if(Math.random()<0.5){var c=r2((rnd(10,99)*10+rnd(1,9))/100);return {q:"Round "+c+" to the nearest tenth",type:"num",ans:N(r2(c,1))};}
 var n=r2(rnd(11,99)/10,1);return {q:n+" \u00d7 10",type:"num",ans:N(r2(n*10))};}
-if(Math.random()<0.5){var w=r2(rnd(1000,9999)/1000,3);return {q:"Round "+w+" to the nearest hundredth",type:"num",ans:N(r2(w,2))};}
+if(Math.random()<0.5){var w=r2((rnd(100,999)*10+rnd(1,9))/1000,3);return {q:"Round "+w+" to the nearest hundredth",type:"num",ans:N(r2(w,2))};}
 var nums=[r2(rnd(100,999)/100),r2(rnd(100,999)/100),r2(rnd(100,999)/100)];var opts=shuffle(nums.map(String));var ans=nums.slice().sort(function(x,y){return x-y;}).map(function(v){return opts.indexOf(String(v));});return {q:"Put in order from least to greatest",type:"order",options:opts,ans:ans};}
 function m5(L){if(L===1){var a=r2(rnd(11,89)/10,1),b=r2(rnd(11,89)/10,1);return Math.random()<0.5?{q:a+" + "+b,type:"num",ans:N(r2(a+b))}:{q:r2(a+b)+" \u2212 "+b,type:"num",ans:N(a)};}
 if(L===2){var c=r2(rnd(150,999)/100),d=r2(rnd(150,999)/100);return Math.random()<0.5?{q:c+" + "+d,type:"num",ans:N(r2(c+d))}:{q:r2(c+d)+" \u2212 "+d,type:"num",ans:N(c)};}
