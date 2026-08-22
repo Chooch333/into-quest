@@ -393,5 +393,107 @@ if(a==="attack"){doAttack();return;}
 if(a==="collect"){collect();return;}
 if(a==="check"){if(S.fb){S.prob=S.boss.gen(S.level);resetAnswer();render();return;}if(!hasAnswer())return;var ok=isCorrect();S.total++;if(ok)S.right++;S.fb=ok?{ok:true}:{ok:false,a:answerText()};render();return;}
 });
+/* ===== SIEGE UPDATE ===== */
+var fl=document.createElement("link");fl.rel="stylesheet";fl.href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&display=swap";document.head.appendChild(fl);
+var PLAYER="Elliott";
+var TAGS=["PLACE VALUE","MULTIPLICATION","DIVISION","DECIMALS","ADD & SUBTRACT DECIMALS","MULTIPLY & DIVIDE DECIMALS","ADD & SUBTRACT FRACTIONS","MULTIPLY & DIVIDE FRACTIONS","VOLUME","MEASUREMENT & DATA","GRAPHS & PATTERNS","ORDER OF OPERATIONS"];
+BOSSES.forEach(function(b,i){b.tag=TAGS[i];});
+var CONSUM=[{id:"bandage",ic:"\uD83E\uDDEA",name:"Bandage",cost:35,desc:"Restores 25 HP"},{id:"shield",ic:"\uD83D\uDEE1\uFE0F",name:"Shield",cost:50,desc:"Blocks one attack"},{id:"skip",ic:"\u23E9",name:"Skip",cost:45,desc:"Skip this question"}];
+function items(){if(!S.save.items)S.save.items={bandage:0,shield:0,skip:0};return S.save.items;}
+function loadSave(){try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);return {coins:o.coins||0,cleared:o.cleared||[],gear:o.gear||[],best:o.best||0,easyMode:o.easyMode!==false,items:o.items||{bandage:0,shield:0,skip:0}};}}catch(e){saveOK=false;}return {coins:0,cleared:[],gear:[],best:0,easyMode:true,items:{bandage:0,shield:0,skip:0}};}
+function nextBossId(){for(var i=0;i<12;i++)if(S.save.cleared.indexOf(i)<0)return i;return 11;}
+function curLevel(){if(S.phase===1)return 1;return levelFor(S.foeHp);}
+function nextProblem(){S.prob=S.boss.gen(curLevel());resetAnswer();S.t=S.limit;}
+function trackHTML(cur){var s=S.save,h='<div class="track"><span class="tk"><span class="node lesson">\uD83D\uDCD6</span><span class="nlab g">Lesson</span></span>';
+for(var i=0;i<12;i++){var done=s.cleared.indexOf(i)>=0,locked=i>0&&s.cleared.indexOf(i-1)<0;
+var cls="node"+(i===11?" final":"")+(done?" done":"")+(i===cur?" cur":"")+(locked&&i!==cur&&!done?" lock":"");
+var lab=i===cur?'<span class="nlab gold">Here</span>':(i===11?'<span class="nlab p">Boss</span>':'<span class="nlab">&nbsp;</span>');
+h+='<span class="link'+(done?" done":"")+'"></span><span class="tk"><span class="'+cls+'">'+(i+1)+'</span>'+lab+'</span>';}
+return h+'</div>';}
+function sceneHTML(){var bo=S.boss,ph=S.phase||2;
+var foeName=ph===1?"Tower Sentry":bo.name;
+var foeMax=ph===1?Math.round(bo.hp*0.4):bo.hp;
+var foepct=Math.max(0,Math.round(S.foeHp/foeMax*100));
+var h='<div class="scene" id="scene">';
+h+='<img class="bgart" src="bg.jpg" alt="" onerror="this.remove()" onload="document.getElementById(&quot;scene&quot;).classList.add(&quot;art&quot;)">';
+h+='<div class="glow"></div><div class="cloud" style="left:16%;top:11%;width:26%;height:9%"></div><div class="cloud" style="left:50%;top:22%;width:20%;height:7%"></div>';
+h+='<svg class="mtns" viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 34 L14 16 L26 30 L38 12 L52 30 L66 18 L80 32 L92 20 L100 30 V60 H0 Z" fill="#3c4c6a" opacity=".85"/><path d="M0 42 L12 30 L28 40 L44 26 L60 40 L76 30 L100 42 V60 H0 Z" fill="#33544c" opacity=".9"/><path d="M46 60 C 48 44 52 44 54 60 Z" fill="#b8c4c2" opacity=".75"/><path d="M0 52 L20 44 L45 52 L70 44 L100 52 V60 H0 Z" fill="#2c4432"/></svg>';
+h+='<div class="twr L"><div class="flag blue"><i></i></div><div class="twrbody"></div><div class="crenel"></div></div>';
+h+='<div class="twr R"><div class="flag red"><i></i></div><div class="twrbody"></div><div class="crenel"></div></div>';
+h+='<div class="champ me"><div class="ear l"></div><div class="ear r"></div><div class="ball"></div><div class="eye l"></div><div class="eye r"></div><div class="smile"></div></div>';
+h+='<div class="champ foe'+(ph===1?" sentry":"")+'"><div class="ball"></div><div class="eye l"></div><div class="eye r"></div><div class="blush l"></div><div class="blush r"></div><div class="smile"></div><div class="sword">\uD83D\uDDE1\uFE0F</div></div>';
+h+='<div class="foebanner">'+bo.face+' \u00A0FOE '+ph+' OF 2</div>';
+h+='<div class="plate L"><div class="pname">'+esc(PLAYER)+'</div><div class="hpwrap"><div class="hpfill" style="width:'+S.myHp+'%"></div><div class="hptxt">'+S.myHp+' / 100</div></div>'+(S.shieldUp?'<div class="shieldup">\uD83D\uDEE1\uFE0F</div>':'')+'</div>';
+h+='<div class="plate R"><div class="pname">'+esc(foeName)+'</div><div class="hpwrap"><div class="hpfill" style="width:'+foepct+'%"></div><div class="hptxt">'+S.foeHp+' / '+foeMax+'</div></div></div>';
+return h+'</div>';}
+function itemsBarHTML(){var it=items(),h='<div class="items">';
+CONSUM.forEach(function(c){var n=it[c.id]||0;var dis=n<=0||(c.id==="bandage"&&S.myHp>=100)||(c.id==="shield"&&S.shieldUp);
+h+='<button class="item" data-item="'+c.id+'"'+(dis?" disabled":"")+'><span class="ic">'+c.ic+'</span><span class="itxt"><span class="inm">'+c.name.toUpperCase()+'</span><span class="ids">'+c.desc+'</span></span><span class="ct">x'+n+'</span></button>';});
+return h+'</div>';}
+function useItem(id){if(S.screen!=="battle")return;var it=items();
+if(id==="bandage"&&it.bandage>0&&S.myHp<100){it.bandage--;S.myHp=Math.min(100,S.myHp+25);S.msg="Bandage! +25 HP.";writeSave();render();}
+else if(id==="shield"&&it.shield>0&&!S.shieldUp){it.shield--;S.shieldUp=true;S.msg="Shield raised \u2014 your next mistake is blocked.";writeSave();render();}
+else if(id==="skip"&&it.skip>0){it.skip--;S.msg="Question skipped.";nextProblem();writeSave();render();}}
+function startBattle(boss){S.boss=boss;S.phase=1;S.foeHp=Math.round(boss.hp*0.4);S.myHp=100;S.streak=0;S.best=0;S.shieldUp=false;S.showHint=false;S.limit=boss.time+bonus().time;S.t=S.limit;S.msg="A Tower Sentry guards the gate. \u201C"+boss.taunt+"\u201D";S.prob=boss.gen(1);resetAnswer();S.screen="battle";startTimer();render();}
+function takeHit(why){var b=bonus(),dmg=Math.max(4,(S.phase===1?S.boss.hit-3:S.boss.hit)-b.def);
+if(S.shieldUp){S.shieldUp=false;S.streak=0;S.msg=why+" Your shield blocks the blow!";S.showHint=true;nextProblem();render();return;}
+S.myHp=Math.max(0,S.myHp-dmg);S.streak=0;S.msg=why+" You take "+dmg+".";S.showHint=true;S.flash="hurt";setTimeout(function(){S.flash=null;},300);
+if(S.myHp<=0){stopTimer();if(S.best>S.save.best){S.save.best=S.best;writeSave();}S.screen="lose";}else nextProblem();render();}
+function doAttack(){if(!hasAnswer())return;
+if(isCorrect()){var b=bonus();S.showHint=false;S.streak++;S.best=Math.max(S.best,S.streak);var dmg=Math.round((22+b.dmg)*(1+Math.min(S.streak-1,6)*0.30));S.foeHp=Math.max(0,S.foeHp-dmg);S.msg=S.streak>=3?(S.streak+"\u00d7 streak! "+dmg+" damage."):("Hit for "+dmg+".");S.flash="hit";setTimeout(function(){S.flash=null;},250);
+if(S.foeHp<=0){if(S.phase===1){S.phase=2;S.foeHp=S.boss.hp;S.msg="The Sentry falls! "+S.boss.name+" steps onto the tower!";nextProblem();}else{stopTimer();S.screen="win";}}
+else nextProblem();
+render();}
+else takeHit("Wrong \u2014 it was "+answerText()+".");}
+function renderBattle(){var bo=S.boss;
+var h='<h1 class="title">INTO-QUEST: SIEGE</h1>'+trackHTML(bo.id)+sceneHTML();
+h+='<div class="topic">'+esc(bo.tag||bo.mod)+' \u2022 '+LEVELS[curLevel()-1].toUpperCase()+'</div>';
+h+='<div class="parch"><div class="q'+(S.prob.q.length>40?" small":"")+'">'+esc(S.prob.q)+'</div>';
+h+='<div class="timer"><div class="tfill" style="width:'+((S.t/S.limit)*100)+'%"></div></div>';
+if(S.prob.type==="num"){h+='<div class="ansrow"><div class="ansbox">'+(S.entry===""?'<span class="ph">Type your answer\u2026</span>':esc(S.entry))+'<span class="caret"></span></div><button class="attackbtn" data-act="attack">ATTACK!</button></div><div class="fmt">Fractions like 3/4 \u2022 Mixed numbers like 2 1/4 \u2022 Decimals like 2.5</div></div>';h+=answerHTML(false);}
+else{h+='</div>'+answerHTML(false)+'<button class="attackbtn" data-act="attack" style="width:100%;padding:13px">ATTACK!</button>';}
+h+='<p class="msg">'+esc(S.msg)+'</p>';
+if(S.showHint)h+='<div class="hint"><b>Remember:</b> '+esc(bo.hint)+'</div>';
+h+=itemsBarHTML();
+h+='<div class="btnrow"><button class="btn ghost" data-act="map">RETREAT TO MAP</button></div>';
+return h;}
+function renderMap(){var s=S.save,b=bonus();
+var h='<h1 class="title" style="text-align:center">INTO-QUEST: SIEGE</h1><p class="sub">Grade 5 \u2022 Storm all twelve towers</p>';
+h+='<div class="savebar '+(saveOK?"ok":"bad")+'">'+(saveOK?"Progress saves automatically on this device":"Saving is blocked \u2014 turn off Private Browsing")+'</div>';
+h+=trackHTML(nextBossId());
+h+='<div class="stats"><div class="stat"><div class="v">'+comma(s.coins)+'</div><div class="l">Coins</div></div><div class="stat"><div class="v">'+s.cleared.length+'/12</div><div class="l">Towers taken</div></div><div class="stat"><div class="v">'+s.best+'</div><div class="l">Best streak</div></div></div>';
+h+='<button class="mode'+(s.easyMode?" on":"")+'" data-act="easy"><span class="dot"></span>'+(s.easyMode?"Warm-up ON \u2014 problems stay easier":"Warm-up OFF \u2014 problems get harder as the boss weakens")+'</button>';
+if(b.dmg||b.def||b.time){h+='<p class="note" style="color:var(--gold2);opacity:.9">Gear: '+(b.dmg?"+"+b.dmg+" dmg ":"")+(b.def?"\u00b7 \u2212"+b.def+" taken ":"")+(b.time?"\u00b7 +"+b.time+"s":"")+'</p>';}
+h+='<div class="list">';
+BOSSES.forEach(function(boss,i){var done=s.cleared.indexOf(boss.id)>=0,locked=i>0&&s.cleared.indexOf(BOSSES[i-1].id)<0;
+h+='<div class="row'+(locked?" locked":"")+(done?" done":"")+'"><span class="face">'+(locked?"\uD83D\uDD12":boss.face)+'</span><span class="txt"><span class="modtag">'+boss.mod+'</span><span class="nm">'+esc(boss.name)+'</span><span class="meta">'+esc(boss.topic)+'</span></span><span class="acts"><button class="mini" data-train="'+boss.id+'">Train</button><button class="mini solid" data-fight="'+boss.id+'"'+(locked?" disabled":"")+'>'+(done?"Again":"Fight")+'</button></span></div>';});
+h+='</div><p class="note">Every tower is guarded by a Sentry \u2014 beat it to face the boss. Train is free practice: no timer, no damage.</p>';
+h+='<div class="btnrow"><button class="btn gold" data-act="shop">ARMORY</button><button class="btn ghost" data-act="reset">START OVER</button></div>';
+return h;}
+function renderShop(){var s=S.save,it=items();
+var h='<h1 class="title" style="text-align:center">INTO-QUEST: SIEGE</h1><h2>The Armory</h2><p class="sub">'+comma(s.coins)+' coins</p>';
+h+='<p class="note" style="text-align:left;opacity:.8">SUPPLIES \u2014 use these during battle:</p><div class="list">';
+CONSUM.forEach(function(c){h+='<div class="row"><span class="face">'+c.ic+'</span><span class="txt"><span class="nm">'+c.name+'</span><span class="meta">'+c.desc+' \u2022 you have '+(it[c.id]||0)+'</span></span><button class="buy" data-cbuy="'+c.id+'"'+(s.coins>=c.cost?"":" disabled")+'>'+c.cost+'</button></div>';});
+h+='</div><p class="note" style="text-align:left;opacity:.8">GEAR \u2014 permanent upgrades:</p><div class="list">';
+GEAR.forEach(function(g){var owned=s.gear.indexOf(g.id)>=0,afford=s.coins>=g.cost;h+='<div class="row'+(owned?" done":"")+'"><span class="txt"><span class="nm">'+esc(g.name)+'</span><span class="meta">'+esc(g.desc)+'</span></span>'+(owned?'<span class="chk">OWNED</span>':'<button class="buy" data-buy="'+g.id+'"'+(afford?"":" disabled")+'>'+g.cost+'</button>')+'</div>';});
+return h+'</div><button class="btn ghost" data-act="map">BACK</button>';}
+function renderTrain(){var bo=S.boss;
+var h='<h1 class="title" style="text-align:center">INTO-QUEST: SIEGE</h1><div class="head"><span class="modtag">'+bo.mod+'</span><h2>Training Grounds</h2><p class="sub">'+esc(bo.topic)+'</p></div><div class="levels">';
+LEVELS.forEach(function(n,i){h+='<button class="lvl'+(S.level===i+1?" on":"")+'" data-lvl="'+(i+1)+'">'+n+'</button>';});
+h+='</div><div class="hint"><b>How to do it:</b> '+esc(bo.hint)+'</div>';
+h+='<div class="parch"><div class="q'+(S.prob.q.length>40?" small":"")+'">'+esc(S.prob.q)+'</div>';
+if(S.prob.type==="num")h+='<div class="ansbox">'+(S.entry===""?'<span class="ph">Type your answer\u2026</span>':esc(S.entry))+'<span class="caret"></span></div>';
+h+='</div>';
+if(S.fb)h+='<p class="fb '+(S.fb.ok?"ok":"bad")+'">'+(S.fb.ok?"Correct!":"Not quite \u2014 the answer is "+esc(S.fb.a)+".")+'</p>';
+h+=answerHTML(!!S.fb);
+h+='<button class="attackbtn train" data-act="check" style="width:100%;padding:13px">'+(S.fb?"NEXT PROBLEM":"CHECK")+'</button>';
+h+='<div class="btnrow" style="align-items:center"><span class="sub" style="flex:1;text-align:left;margin:0">'+S.right+' / '+S.total+' correct</span><button class="btn ghost" data-act="map" style="flex:0 0 auto;padding:9px 14px;font-size:11px">BACK TO MAP</button></div>';
+return h;}
+function renderEnd(win){var bo=S.boss;return '<div class="end"><div class="endface">'+(win?"\uD83C\uDFF0":"\uD83D\uDC80")+'</div><h2>'+(win?esc(bo.name)+" falls \u2014 tower taken!":"You went down")+'</h2><p class="sub">'+(win?"+"+bo.reward+" coins \u00b7 best streak "+S.best:"Best streak "+S.best+". Train this module, stock a Bandage or two at the Armory, then charge again.")+'</p><button class="btn gold" data-act="'+(win?"collect":"map")+'" style="margin-top:14px;width:100%;max-width:260px">'+(win?"COLLECT":"BACK TO MAP")+'</button></div>';}
+document.addEventListener("click",function(e){var t=e.target.closest("button");if(!t)return;var d=t.dataset;
+if(d.item!==undefined){useItem(d.item);return;}
+if(d.cbuy!==undefined){var c=null;CONSUM.forEach(function(x){if(x.id===d.cbuy)c=x;});if(c&&S.save.coins>=c.cost){S.save.coins-=c.cost;items()[c.id]++;writeSave();}render();return;}
+});
+
 render();
 </script></body></html>
