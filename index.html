@@ -193,7 +193,7 @@ var v=parseFloat(fr);if(!isFinite(v))return false;return Math.abs(v-target)<0.00
 function sameSet(a,b){if(a.length!==b.length)return false;var x=a.slice().sort(),y=b.slice().sort();return x.every(function(v,i){return v===y[i];});}
 function sameOrder(a,b){return a.length===b.length&&a.every(function(v,i){return v===b[i];});}
 function isCorrect(){var p=S.prob;if(p.type==="num")return checkNum(S.entry,p.ans);if(p.type==="choice")return S.chosen===p.ans;if(p.type==="multi")return sameSet(S.selected,p.ans);if(p.type==="order")return sameOrder(S.ordered,p.ans);return false;}
-function answerText(){var p=S.prob;if(p.type==="num")return p.ans.t==="f"?p.ans.n+"/"+p.ans.d:String(p.ans.v);if(p.type==="choice")return p.options[p.ans];if(p.type==="multi")return p.ans.map(function(i){return p.options[i];}).join(", ");return p.ans.map(function(i){return p.options[i];}).join(" \u2192 ");}
+function answerText(){var p=S.prob;if(p.type==="num")return p.ans.t==="f"?(p.ans.d===1?String(p.ans.n):p.ans.n+"/"+p.ans.d):String(p.ans.v);if(p.type==="choice")return p.options[p.ans];if(p.type==="multi")return p.ans.map(function(i){return p.options[i];}).join(", ");return p.ans.map(function(i){return p.options[i];}).join(" \u2192 ");}
 function hasAnswer(){var p=S.prob;if(p.type==="num")return S.entry!=="";if(p.type==="choice")return S.chosen!==null;if(p.type==="multi")return S.selected.length>0;return S.ordered.length===p.options.length;}
 var LEVELS=["Easy","Medium","Hard"];
 function levelFor(hp){var p=hp/S.boss.hp;if(S.save.easyMode)return p>0.25?1:2;return p>0.55?1:(p>0.2?2:3);}
